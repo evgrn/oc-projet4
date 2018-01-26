@@ -1,25 +1,37 @@
 <?php
 
-## TODO : Configurer getExcerpt() en comptant les mots
+## TODO :
+## Configurer getExcerpt() en comptant les mots
+
 
 namespace App\Table;
+use App\App;
 
 /**
  * Modèle des posts.
  */
-class Post{
+class Post extends Table{
+
+  protected static $table = 'posts';
+
+/**
+ * Récupère le post correspondant à $_GET['id'].
+ * @return object Objet de l'article correspondant
+ */
+  public static function getSingle(){
+    return self::query("SELECT * FROM " . self::$table . " WHERE id = ?",
+        [$_GET['id']],
+        true);
+  }
 
   /**
-   * Remplace dynamiquement la propriété appelée par le getter de la approprié et la remplace par celui-ci,
-   * puis envoie la propriété ainsi générée.
-   * @param  string $param Paramètre appelé.
-   * @return string        Propriété générée dynamiquement.
+   * Récupérer un nombre défini de posts, par ordre décroissant de nouveauté.
+   * @param  int $number Nombre de posts que l'on veut récupérer
+   * @return array       Tableau regroupant les objets demandés par ordre décroissant de nouveauté
    */
-  public function __get($param){
-    $method = 'get' . ucfirst(strtolower($param));
-    $this->$param = $this->$method(); // Ne pas appeler la méthode à chaque fois
-    return $this->$param;
-
+  public static function getLast($number){
+    return self::query("SELECT * FROM " . self::$table . "
+        ORDER BY id DESC LIMIT " . $number);
   }
 
   /**
@@ -35,7 +47,7 @@ class Post{
    * @return string Extrait du contenu du post
    */
   public function getExcerpt(){
-    $excerpt = substr($this->content, 0, 300) . ' (...)';
+    $excerpt = substr($this->content, 0, 1000) . ' (...)';
     $html = '<p>' . $excerpt . '</p>';
     $html .= '<p><a class="btn btn-primary" href=' . $this->getUrl() . '>Lire le chapitre</a></p>';
     return $html;

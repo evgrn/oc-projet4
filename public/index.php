@@ -1,9 +1,8 @@
 <?php
 require '../app/Autoloader.php';
-
-// Initialisation des objets
+// Initialisation des classes
 \App\Autoloader::register();
-$db = new \App\DB('ocp4');
+
 
 if(isset($_GET['page'])){
     $page = $_GET['page'];
@@ -17,6 +16,9 @@ if($page === 'index'){
 }
 elseif($page === 'single'){
   require '../pages/single.php';
+}
+else{
+  require '../pages/notfound.php';
 }
 $content = ob_get_clean();
 

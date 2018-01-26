@@ -67,11 +67,11 @@ class DB{
     $req->execute($statement_params);
     $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
 
-    if($single){
-      $data = $req->fetch();
+    if(!$single == true){
+      $data = $req->fetchAll();
     }
     else{
-      $data = $req->fetchAll();
+      $data = $req->fetch();
     }
 
     return $data;
