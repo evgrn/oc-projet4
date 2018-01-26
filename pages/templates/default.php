@@ -10,7 +10,7 @@
     <!-- CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/master.css">
-    
+
   </head>
 
 
@@ -19,18 +19,21 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="navbar-brand" href="#">Billet Simple Pour l'Alaska</a>
+          <a class="navbar-brand" href="index.php?page=index">Billet Simple Pour l'Alaska</a>
             <ul class="nav">
-              <li class="active"><a href="#">Accueil</a></li>
-              <li><a href="#about">Connexion</a></li>
-              <li><a href="#contact">Liste des chapitres</a></li>
+              <li class="active"><a href="index.php?page=index">Accueil</a></li>
+              <li><a href="#">Connexion</a></li>
+              <li><a href="#">Liste des chapitres</a></li>
             </ul>
         </div>
       </div>
     </div>
 
     <div class="container">
-      <?= $content ?>
+      <div class="main-content">
+          <?= $content ?>
+      </div>
+
     </div>
 
   </body>

@@ -1,6 +1,9 @@
 <?php
 require '../app/Autoloader.php';
+
+// Initialisation des objets
 \App\Autoloader::register();
+$db = new \App\DB('ocp4');
 
 if(isset($_GET['page'])){
     $page = $_GET['page'];

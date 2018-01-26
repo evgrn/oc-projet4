@@ -4,12 +4,11 @@ namespace App;
 /**
  * Class Atoloader
  * Charge les classes dynamiquement
- *
 */
 class Autoloader{
 
   /**
-   * Applique la fonction autoload à la classe chargée
+   * Applique la fonction autoload à la classe chargée.
   **/
   public static function register(){
     spl_autoload_register(array(__CLASS__, 'autoload'));
@@ -17,17 +16,17 @@ class Autoloader{
 
   /**
    *
-   * Require le fichier associé à la classe dynamiquement en fonction  de ses noms et namespaces.
+   * Requiert dynamiquement le fichier associé à la classe en fonction de ses noms et namespaces.
    * Ne s'applique que si la classe est dans le même namespace que l'autolader.
    *
-   * @param string $className
+   * @param string $class_name
   **/
-  public static function autoload($className){
+  public static function autoload($class_name){
 
-    if(strpos($className, __NAMESPACE__ . '\\') === 0){
-      $className = str_replace(__NAMESPACE__ . '\\', '', $className);
-      $className = str_replace('\\', '/', $className);
-      require __DIR__ . '/' . $className . '.php';
+    if(strpos($class_name, __NAMESPACE__ . '\\') === 0){
+      $class_name = str_replace(__NAMESPACE__ . '\\', '', $class_name);
+      $class_name = str_replace('\\', '/', $class_name);
+      require __DIR__ . '/' . $class_name . '.php';
     }
 
   }
