@@ -1,45 +1,80 @@
 <?php
-namespace App;
+use Core\Config;
+use Core\DB\MysqlDB;
+
 
 /**
- * Classe gérant l'application
+ * Classe factory gérant l'application
  */
 class App{
 
-  // Juste ça à changer si on change de serveur
-  const DB_NAME = 'ocp4';
-  const DB_HOST = 'localhost';
-  const DB_USR = 'root';
-  const DB_PWD = 'root';
-
-  private static $db;
-  private static $title = "Billet Simple pour l'Alaska";
+  private static $_instance;
+  private $db_instance;
+  private $title = "Billet Simple pour l'Alaska";
 
   /**
-   * S'il n'en possède pas déjà, instanciation connectée à la BDD de la classe DB dans la classe courante et la renvoie.
-   * @return \App\DB  Instance de la classe DB, connectée à la BDD
+   * Ouvre la session et importe et initialise les autoloaders
+   *
    */
-  public static function getDb(){
-    if(!self::$db){
-      self::$db = new DB(self::DB_NAME, self::DB_HOST, self::DB_USR, self::DB_PWD);
-    }
-    return self::$db;
+  public static function init(){
+    session_start();
+    require ROOT . "/app/Autoloader.php";
+    App\Autoloader::register();
+    require ROOT . "/Core/Autoloader.php";
+    Core\Autoloader::register();
   }
+
+  /**
+   * Récupère une instance du modèle de table correspondant au nom de la table entré en paramètres
+   * @param  string $table_name     Nom de la table
+   * @return Core\Table\Table       Instance du modèle de table demandé.
+   */
+  public function getTable($table_name){
+    $class_name = '\App\Table\\' . ucfirst(strtolower($table_name)) . 'Table';
+    return new $class_name($this->getDb());
+  }
+
+  /**
+   * Récupère une instance de la classe MysqlDB dans l'objet courant si elle n'y est pas déjà instanciée,
+   * la retourne.
+   * @return \Core\DB\MysqlDB   Instance de la classe MysqlDB
+   */
+  public function getDb(){
+    if($this->db_instance == null){
+      $config = Config::getInstance(ROOT . '/config/config.php');
+      $this->db_instance = new MysqlDB($config->get('db_name'), $config->get('db_host'), $config->get('db_usr'), $config->get('db_pwd'));
+    }
+    return $this->db_instance;
+  }
+
+  /**
+   * Instancie la classe courante à l'interieur de celle-ci si ce na pas déjà été fait,
+   * retourne ladite instance.
+   * @return App    Instance de la classe courante
+   */
+  public static function getInstance(){
+    if(!self::$_instance){
+      self::$_instance = new App();
+    }
+    return self::$_instance;
+  }
+
+
 
   /**
    * Affiche le titre.
    * @return string Titre contenu dans la classe courante
    */
-  public static function getPageTitle(){
-    return self::$title;
+  public function getPageTitle(){
+    return $this->title;
   }
 
   /**
    * Définit le sous-titre dans la classe courante.
    * @param string $subtitle Sous-titre
    */
-  public static function setPageSubtitle($subtitle){
-    self::$title = $subtitle . ' | ' . self::$title ;
+  public function setPageSubtitle($subtitle){
+    $this->title = $subtitle . ' | ' . $this->title ;
   }
 
 

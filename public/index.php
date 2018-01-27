@@ -1,21 +1,21 @@
 <?php
-require '../app/Autoloader.php';
-// Initialisation des classes
-\App\Autoloader::register();
+define('ROOT', dirname(__DIR__));
+require ROOT . '/app/App.php';
+App::init();
 
 
 if(isset($_GET['page'])){
     $page = $_GET['page'];
 } else {
-  $page = 'index';
+  $page = 'posts.index';
 }
 
 ob_start();
-if($page === 'index'){
-  require '../pages/index.php';
+if($page === 'posts.index'){
+  require ROOT . '/pages/posts/index.php';
 }
-elseif($page === 'single'){
-  require '../pages/single.php';
+elseif($page === 'posts.single'){
+  require '../pages/posts/single.php';
 }
 else{
   require '../pages/notfound.php';

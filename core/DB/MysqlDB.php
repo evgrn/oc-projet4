@@ -1,11 +1,11 @@
 <?php
-namespace App;
+namespace Core\DB;
 use \PDO;
 
 /**
  * Classe gérant la connexion et les requêtes à la base de donnée.
  */
-class DB{
+class MysqlDB extends \Core\DB\DB{
   private $db_name;
   private $db_host;
   private $db_usr;
@@ -32,7 +32,7 @@ class DB{
    * @return \PDO Instance de PDO connecté à la BDD
    */
   private function getPDO(){
-    if(!$this->pdo){
+    if($this->pdo === null){
       $pdo = new PDO("mysql:dbname=$this->db_name;host:$this->db_host", $this->db_usr, $this->db_pwd);
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this->pdo = $pdo;
@@ -44,13 +44,26 @@ class DB{
 
   /**
    * Effectue une requête non préparée et renvoie le résultat sous forme d'objets de la classe désirée.
-   * @param  string $statement  Requête SQL
-   * @param  string $class_name Nom de la classe dont doivent être issus les objets retournés
-   * @return array              Tableau contenant les objets générés en fonction du résultat
+   * @param  string   $statement  Requête SQL
+   * @param  string   $class_name Nom de la classe dont doivent être issus les objets retournés, nul par défaut.
+   * @param  boolean  $single     True si on veut récupérer un seul objet, False sinon. False par défaut.
+   * @return array                Tableau contenant les objets générés en fonction du résultat
    */
-  public function query($statement, $class_name){
+  public function query($statement, $class_name = null, $single = false){
     $req = $this->getPDO()->query($statement);
-    $data = $req->fetchAll(PDO::FETCH_CLASS, $class_name);
+    if($class_name != null){
+      $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+    }
+    else{
+        $req->setFetchMode(PDO::FETCH_OBJ);
+    }
+    if($single){
+        $data = $req->fetch();
+    }
+    else{
+        $data = $req->fetchAll();
+    }
+
     return $data;
   }
 
