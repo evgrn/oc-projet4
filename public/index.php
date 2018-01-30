@@ -19,23 +19,15 @@ if(isset($_GET['page'])){
   $page = 'posts.index';
 }
 
-ob_start();
-if($page === 'posts.index'){
-  require ROOT . '/pages/posts/index.php';
-}
-elseif($page === 'posts.single'){
-  require '../pages/posts/single.php';
-}
-elseif($page === 'posts.list'){
-  require '../pages/posts/list.php';
-}
-elseif($page === 'users.login'){
-  require '../pages/users/login.php';
+
+$page = explode('.', $page);
+if(sizeof($page) === 3){
+  $controller = '\App\Controller\\' . ucfirst($page[0]) . '\\' . ucfirst($page[1]). 'Controller';
+  $action = $page[2];
+}else{
+  $action = $page[1];
+  $controller = '\App\Controller\\' . ucfirst($page[0]) . 'Controller';
 }
 
-else{
-  require '../pages/notfound.php';
-}
-$content = ob_get_clean();
-
-require '../pages/templates/default.php';
+$controller = new $controller();
+$controller->$action();

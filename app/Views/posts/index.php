@@ -2,8 +2,8 @@
 <p>Je publierai ici chaque semaine une nouvelle page de mon roman éponyme.</p>
 
 
-</div>
-<?php foreach(App::getInstance()->getTable('post')->getLast(4) as $post): ?>
+
+<?php foreach($posts as $post): ?>
 
   <article class="chapter">
     <h2 class="chapter-title-index"><?= $post->title ?></h2>
@@ -12,5 +12,3 @@
   </article>
 
 <?php endforeach; ?>
-
-</div><!-- .main-content>

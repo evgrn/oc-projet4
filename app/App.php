@@ -77,12 +77,7 @@ class App{
     $this->title = $subtitle . ' | ' . $this->title ;
   }
 
-  public function access(bool $value){
-    if($value == true){
-      return "Access granted";
-    }
-    return "Access Denied";
-  }
+
 
 
 

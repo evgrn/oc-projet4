@@ -24,7 +24,7 @@
               <li class="active"><a href="index.php?page=posts.index">Accueil</a></li>
               <li><a href="index.php?page=users.login">Connexion</a></li>
               <li><a href="index.php?page=posts.list">Liste des chapitres</a></li>
-              <?= $adminTools ?>
+            
             </ul>
         </div>
       </div>

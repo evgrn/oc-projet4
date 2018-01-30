@@ -29,8 +29,12 @@ class DBAuth{
   }
 
   public function isLogged(){
-    if(isset($_SESSION['loggedAs'])){
-      return ($_SESSION['loggedAs'] == 1);
+    return isset($_SESSION['loggedAs']);
+  }
+
+  public function getUserId(){
+    if($this->isLogged()){
+      return $_SESSION['loggedAs'];
     }
     return false;
   }
