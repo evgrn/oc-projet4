@@ -18,10 +18,10 @@ class App{
    */
   public static function init(){
     session_start();
-    require ROOT . "/app/Autoloader.php";
-    App\Autoloader::register();
     require ROOT . "/Core/Autoloader.php";
     Core\Autoloader::register();
+    require ROOT . "/app/Autoloader.php";
+    App\Autoloader::register();
   }
 
   /**
@@ -75,6 +75,13 @@ class App{
    */
   public function setPageSubtitle($subtitle){
     $this->title = $subtitle . ' | ' . $this->title ;
+  }
+
+  public function access(bool $value){
+    if($value == true){
+      return "Access granted";
+    }
+    return "Access Denied";
   }
 
 

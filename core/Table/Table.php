@@ -38,6 +38,10 @@ abstract class Table{
           true);
     }
 
+    public function getAll(){
+      return $this->query("SELECT * FROM " . $this->table );
+    }
+
 
 
   /**
@@ -63,4 +67,40 @@ abstract class Table{
     }
   }
 
-}
+  public function update($id, $fields){
+    $sql_indexes = [];
+    $sql_values = [];
+
+    foreach($fields as $key => $value){
+        $sql_indexes[] = "$key = ?";
+        $sql_values[] = $value;
+      }
+      $sql_values[] = $id;
+      $sql_indexes = implode(', ', $sql_indexes);
+
+
+    return $this->query("UPDATE  " . $this->table . ' SET ' . $sql_indexes . ' WHERE id = ?', $sql_values, true );
+
+  }
+
+  public function create($fields){
+    $sql_indexes = [];
+    $sql_values = [];
+
+    foreach($fields as $key => $value){
+        $sql_indexes[] = "$key = ?";
+        $sql_values[] = $value;
+      }
+
+      $sql_indexes = implode(', ', $sql_indexes);
+
+
+    return $this->query("INSERT INTO  " . $this->table . ' SET post_date = NOW(), ' . $sql_indexes ,  $sql_values, true );
+
+  }
+
+  public function delete($id){
+    $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
+  }
+
+  }

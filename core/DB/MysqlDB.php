@@ -51,6 +51,13 @@ class MysqlDB extends \Core\DB\DB{
    */
   public function query($statement, $class_name = null, $single = false){
     $req = $this->getPDO()->query($statement);
+    if(
+      strpos($statement, 'UPDATE') === 0 ||
+      strpos($statement, 'INSERT') === 0 ||
+      strpos($statement, 'DELETE') === 0
+    ){
+      return $req;
+    }
     if($class_name != null){
       $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
     }
@@ -75,10 +82,23 @@ class MysqlDB extends \Core\DB\DB{
    * @param  boolean $single           True si on veut récupérer un seul objet, False sinon
    * @return array/object              Résultat de la requête
    */
-  public function prepare($statement, $statement_params, $class_name, $single = false){
+  public function prepare($statement, $statement_params, $class_name = null, $single = false){
     $req = $this->getPDO()->prepare($statement);
-    $req->execute($statement_params);
-    $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+    $result = $req->execute($statement_params);
+
+    if(
+      strpos($statement, 'UPDATE') === 0 ||
+      strpos($statement, 'INSERT') === 0 ||
+      strpos($statement, 'DELETE') === 0
+    ){
+      return $result;
+    }
+    if($class_name != null){
+      $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+    }
+    else{
+        $req->setFetchMode(PDO::FETCH_OBJ);
+    }
 
     if(!$single == true){
       $data = $req->fetchAll();
@@ -90,6 +110,10 @@ class MysqlDB extends \Core\DB\DB{
     return $data;
   }
 
+
+  public function getLastInsertedId(){
+    return $this->getPDO()->lastInsertId();
+  }
 
 
 }

@@ -21,6 +21,10 @@ class PostTable extends \Core\Table\Table{
         ORDER BY id DESC LIMIT " . $number);
   }
 
+  public function getAll(){
+    return $this->query("SELECT * FROM " . $this->table );
+  }
+
 
 
 

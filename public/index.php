@@ -2,6 +2,15 @@
 define('ROOT', dirname(__DIR__));
 require ROOT . '/app/App.php';
 App::init();
+$auth = new \Core\Auth\DBAuth(App::getInstance()->getDb());
+if($auth->isLogged()){
+  $adminTools = '<li><a href="admin.php?page=admin.posts.index">Administration</a></li>';
+
+}
+else{
+  $adminTools ='';
+}
+
 
 
 if(isset($_GET['page'])){
@@ -17,6 +26,13 @@ if($page === 'posts.index'){
 elseif($page === 'posts.single'){
   require '../pages/posts/single.php';
 }
+elseif($page === 'posts.list'){
+  require '../pages/posts/list.php';
+}
+elseif($page === 'users.login'){
+  require '../pages/users/login.php';
+}
+
 else{
   require '../pages/notfound.php';
 }

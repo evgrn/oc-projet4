@@ -3,7 +3,7 @@
 
 
 </div>
-<?php foreach(App::getInstance()->getTable('post')->getLast(3) as $post): ?>
+<?php foreach(App::getInstance()->getTable('post')->getLast(4) as $post): ?>
 
   <article class="chapter">
     <h2 class="chapter-title-index"><?= $post->title ?></h2>

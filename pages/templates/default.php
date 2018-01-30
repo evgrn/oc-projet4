@@ -22,8 +22,9 @@
           <a class="navbar-brand" href="index.php?page=posts.index">Billet Simple Pour l'Alaska</a>
             <ul class="nav">
               <li class="active"><a href="index.php?page=posts.index">Accueil</a></li>
-              <li><a href="#">Connexion</a></li>
-              <li><a href="#">Liste des chapitres</a></li>
+              <li><a href="index.php?page=users.login">Connexion</a></li>
+              <li><a href="index.php?page=posts.list">Liste des chapitres</a></li>
+              <?= $adminTools ?>
             </ul>
         </div>
       </div>
