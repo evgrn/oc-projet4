@@ -5,7 +5,7 @@
 <ul class="chapters-list list-group">
 <?php foreach($posts as $post): ?>
   <li class="chapter-list-entry list-group-item">
-  <a href="<?= $post->getUrl() ?>"><?= $post->title ?></a>, mis en ligne le <?= $post->post_date ?>.
+  <a href="<?= $post->getUrl() ?>"><?= $post->title ?></a>, mis en ligne le <?= $post->date ?>.
   </li>
 <?php endforeach; ?>
 </ul>

@@ -7,8 +7,9 @@
 
   <article class="chapter">
     <h2 class="chapter-title-index"><?= $post->title ?></h2>
-    <p class="chapter-date-index"><?= $post->post_date ?></p>
+    <p class="chapter-date-index"><?= $post->date ?></p>
     <p class="chapter-content-index"><?= $post->excerpt ?></p>
+    <p><a class="btn btn-primary" href="<?=$post->url  ?>">Lire le chapitre</a></p>'
   </article>
 
 <?php endforeach; ?>

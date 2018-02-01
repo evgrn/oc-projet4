@@ -15,20 +15,14 @@
 
 
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
-          <a class="navbar-brand" href="index.php?page=posts.index">Billet Simple Pour l'Alaska</a>
-            <ul class="nav">
-              <li class="active"><a href="index.php?page=posts.index">Accueil</a></li>
-              <li><a href="index.php?page=users.login">Connexion</a></li>
-              <li><a href="index.php?page=posts.list">Liste des chapitres</a></li>
-            
-            </ul>
-        </div>
+
+                <?= $navbar ?>
+
       </div>
     </div>
+
 
     <div class="container">
       <div class="main-content">

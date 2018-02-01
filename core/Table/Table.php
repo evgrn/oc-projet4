@@ -29,20 +29,22 @@ abstract class Table{
   }
 
   /**
-   * Récupère le post correspondant à $_GET['id'].
+   * Récupère la ligne correspondant à $_GET['id'].
    * @return object Objet de l'article correspondant
    */
-    public function getSingle(){
+    public function getSingle($id){
       return $this->query("SELECT * FROM " . $this->table . " WHERE id = ?",
-          [$_GET['id']],
+          [$id],
           true);
     }
 
-    public function getAll(){
+  /**
+   * Récupère toutes les lignes de la table.
+   * @return array   Ensemble des lignes de la table
+   */
+  public function getAll(){
       return $this->query("SELECT * FROM " . $this->table );
     }
-
-
 
   /**
    * Effectue une requête SQL et renvoie les éléments demandés.
@@ -52,7 +54,14 @@ abstract class Table{
    * @return array/object                     Résultat de la requête
    */
   public function query($statement, $statement_params = null, $single = null){
-    if(!$statement_params){
+    if(strpos($statement, 'SELECT COUNT(*)') === 0){
+      return $this->db->prepare(
+          $statement,
+          $statement_params,
+          null,
+          $single);
+    }
+    else if(!$statement_params){
       return $this->db->query(
           $statement,
           str_replace('Table', 'Model', get_class($this)),
@@ -67,6 +76,12 @@ abstract class Table{
     }
   }
 
+  /**
+   * Met à jour une ligne de la table en fonction des champs fournis.
+   * @param  int $id        Id de la ligne à modifier
+   * @param  array $fields  Champs à modifier et leurs valeurs
+   * @return bool           Résultat de la requête
+   */
   public function update($id, $fields){
     $sql_indexes = [];
     $sql_values = [];
@@ -83,6 +98,11 @@ abstract class Table{
 
   }
 
+  /**
+   * Crée une ligne de la table en fonction des champs fournis.
+   * @param  string $fields Champs à créer et leurs valeurs
+   * @return bool            Résultat de la requête
+   */
   public function create($fields){
     $sql_indexes = [];
     $sql_values = [];
@@ -95,12 +115,16 @@ abstract class Table{
       $sql_indexes = implode(', ', $sql_indexes);
 
 
-    return $this->query("INSERT INTO  " . $this->table . ' SET post_date = NOW(), ' . $sql_indexes ,  $sql_values, true );
+    return $this->query("INSERT INTO  " . $this->table . ' SET date = NOW(), ' . $sql_indexes ,  $sql_values, true );
 
   }
 
+  /**
+   * Supprime une ligne de la table
+   * @param  int $id    Id de la ligne à supprimer
+   */
   public function delete($id){
     $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
   }
 
-  }
+}

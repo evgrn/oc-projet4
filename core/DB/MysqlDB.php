@@ -93,6 +93,10 @@ class MysqlDB extends \Core\DB\DB{
     ){
       return $result;
     }
+    elseif( strpos($statement, 'SELECT COUNT(*)') === 0){
+      $req->setFetchMode(PDO::FETCH_NUM);
+      return intval($req->fetch()[0]);
+    }
     if($class_name != null){
       $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
     }
@@ -111,6 +115,10 @@ class MysqlDB extends \Core\DB\DB{
   }
 
 
+  /**
+   * Affiche l'id de la dernière ligne insérée dans la table.
+   * @return int id de la dernière ligne insérée dans la table
+   */
   public function getLastInsertedId(){
     return $this->getPDO()->lastInsertId();
   }

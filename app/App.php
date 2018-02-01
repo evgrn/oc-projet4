@@ -14,7 +14,6 @@ class App{
 
   /**
    * Ouvre la session et importe et initialise les autoloaders
-   *
    */
   public static function init(){
     session_start();

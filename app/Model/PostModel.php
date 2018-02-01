@@ -12,7 +12,7 @@ class PostModel extends \Core\Model\Model{
    * @return string URL du post
    */
   public function getUrl(){
-    return "index.php?page=posts.single&amp;id={$this->id}";
+    return "index.php?page=logged.posts.single&amp;id={$this->id}";
   }
 
   /**
@@ -22,7 +22,6 @@ class PostModel extends \Core\Model\Model{
   public function getExcerpt(){
     $excerpt = substr($this->content, 0, 1000) . ' (...)';
     $html = '<p>' . $excerpt . '</p>';
-    $html .= '<p><a class="btn btn-primary" href=' . $this->getUrl() . '>Lire le chapitre</a></p>';
     return $html;
   }
 
