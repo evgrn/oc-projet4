@@ -1,7 +1,5 @@
+
 <h1>Administration</h1>
-
-
-
 <p><a href="?page=admin.posts.add" class="btn btn-success">Nouveau</a></p>
 <table class="table">
   <thead>
@@ -19,7 +17,7 @@
   <td><?= $post->id ?></td>
   <td><?= $post->title ?></td>
   <td><?= $post->date ?></td>
-  <td><a href="index.php?page=admin.comments.attached&amp;id=<?=$post->id?>"><?= $post->commentNb ?></a></td>
+  <td><?= $post->commentNb ?></td>
   <td><?= $post->reportedCommentNb ?></td>
   <td>
     <a class="btn btn-primary" href="index.php?page=admin.posts.edit&amp;id=<?= $post->id ?>">Éditer</a>

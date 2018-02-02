@@ -18,26 +18,30 @@ class CommentTable extends \Core\Table\Table{
         false);
   }
 
+
   /**
-   * Récupère la somme des commentaires liés au post ayant l'id passé en paramètre.
-   * @param  string   $id   Id du post
-   * @return int            somme des commentaires liés au post ayant l'id passé en paramètre
+   * Affiche la somme des commentaires liés à un post dont l'id est entré en paramètre.
+   * @param  int  $id           Id du post
+   * @param  boolean $linked    S'il vaut true (par défaut) et que la somme des liens n'est pas nulle,  génère le résultat sous forme de lien vers lesdits commentaires, retourne seulement la somme sinon
+   * @return string/int         Le nombre de commentaires liés au post, sous forme de lien ou brut.
    */
-  public function getAttachedCommentAmount($id){
-    return $this->query("SELECT COUNT(*) FROM {$this->table} WHERE post_id = ?",
+  public function getAttachedCommentSum($id, $linked = true){
+    $sum =  $this->query("SELECT COUNT(*) FROM {$this->table} WHERE post_id = ?",
     [$id],
     true);
+    if($sum == 0 || $linked == false){
+      return $sum;
+    } else{
+      return '<a href="index.php?page=admin.comments.attached&amp;id=' . $id . '">' . $sum . '</a>';
+    }
   }
 
   /**
-   * Récupère la somme des commentaires signalés liés au post ayant l'id passé en paramètre.
-   * @param  string   $id   Id du post
-   * @return int            somme des commentaires signalés liés au post ayant l'id passé en paramètre
+   * Supprime tous les commentaires liés au post dont l'id est entré en paramètre.
+   * @param  int $id    Id du post 
    */
-  public function getReportedAttachedCommentAmount($id){
-    return $this->query("SELECT COUNT(*) FROM {$this->table} WHERE post_id = ? AND reported > 0",
-    [$id],
-    true);
+  public function deleteAttached($id){
+      $this->query("DELETE FROM {$this->table} WHERE post_id = ?", [$id]);
   }
 
 

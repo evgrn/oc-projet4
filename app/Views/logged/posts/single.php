@@ -18,7 +18,7 @@
   <?php foreach($comments as $comment): ?>
   <div class="comment">
     <h3 class="comment-title"><?= $comment->title ?></h3>
-     <?= $comment->reportButton ?>
+    <?= $comment->reportItem ?>
     <p class="comment-details">Par <?= $comment->author ?>, le <?= $comment->date ?></p>
     <p class="comment-content"><?= $comment->content ?></p>
   </div>

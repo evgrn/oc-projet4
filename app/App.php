@@ -13,7 +13,7 @@ class App{
   private $title = "Billet Simple pour l'Alaska";
 
   /**
-   * Ouvre la session et importe et initialise les autoloaders
+   * Ouvre la session et importe et initialise les autoloaders.
    */
   public static function init(){
     session_start();
@@ -21,6 +21,7 @@ class App{
     Core\Autoloader::register();
     require ROOT . "/app/Autoloader.php";
     App\Autoloader::register();
+
   }
 
   /**

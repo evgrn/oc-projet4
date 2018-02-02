@@ -1,3 +1,5 @@
+
+
 <h1>Bienvenue sur <strong>Billet Simple pour l'Alaska</strong></h1>
 <p>Je publierai ici chaque semaine une nouvelle page de mon roman éponyme.</p>
 
@@ -9,7 +11,7 @@
     <h2 class="chapter-title-index"><?= $post->title ?></h2>
     <p class="chapter-date-index"><?= $post->date ?></p>
     <p class="chapter-content-index"><?= $post->excerpt ?></p>
-    <p><a class="btn btn-primary" href="<?=$post->url  ?>">Lire le chapitre</a></p>'
+    <p><a class="btn btn-primary" href="<?=$post->url  ?>">Lire le chapitre</a></p>
   </article>
 
 <?php endforeach; ?>

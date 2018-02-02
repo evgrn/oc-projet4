@@ -10,12 +10,13 @@ class PostsController extends AppController{
 
   /**
    * Charge les constructeur parents (choisit la navnar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
-   * charge les modèles de table "post" et "comment".
+   * charge les modèles de table "post", "report", et "comment".
    */
   public function __construct(){
     parent::__construct();
     $this->loadModel('post');
     $this->loadModel('comment');
+    $this->loadModel('report');
   }
 
   /**
@@ -28,9 +29,10 @@ class PostsController extends AppController{
   }
 
   /**
-   * Réucupère le post dont l'id est récupérée via la méthode GET
-   * et affiche la vue correspondante,
-   * Si aucun post ne correspond, affiche la page notfound.
+   * Réucupère le post dont l'id est récupéré via la méthode GET et affiche la vue correspondante
+   * et un formulaire de commentaires;
+   * si aucun post ne correspond, affiche la page notfound;
+   * si la variable POST n'est pas vide, sauvegarde le commentaire.
    */
   public function single(){
     $post = $this->post->getSingle($_GET['id']);
@@ -39,11 +41,6 @@ class PostsController extends AppController{
       return;
     }
     else{
-
-
-
-
-
       if(!empty($_POST)){
         $result = $this->comment->create(array(
           'title' => $_POST['title'],
@@ -53,18 +50,18 @@ class PostsController extends AppController{
         ));
 
         if($result){
-        header('location: index.php?page=logged.posts.single&id=' . $_GET['id']);
+        header('location: index.php?page=logged.posts.single&id=' . $_GET['id'] . '&success=addedcomment');
         }
       }
       $comments = $this->comment->getAttachedComments($_GET['id']);
-      $commentAmount = $this->comment->getAttachedCommentAmount($_GET['id']);
+      $commentAmount = $this->comment->getAttachedCommentSum($_GET['id'], false);
 
-      $form = new \Core\HTML\BootstrapForm($_POST);
+      foreach($comments as $comment){
+        $comment->reportItem = $this->report->getReportButton($comment->id, $post->id);
 
+      }
 
-      $app = App::getInstance();
-      $auth = new \Core\Auth\DBAuth($app->getDb());
-
+      $form = new \Core\HTML\BootstrapForm();
       $this->render('logged.posts.single', compact('post', 'comments', 'commentAmount', 'form'));
     }
 
@@ -78,6 +75,5 @@ class PostsController extends AppController{
     $posts = $this->post->getAll();
     $this->render('logged.posts.list', compact('posts'));
   }
-
 
 }

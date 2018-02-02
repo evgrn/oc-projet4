@@ -23,8 +23,8 @@ class UsersController extends AppController{
    * Affiche un formulaire de connexion,
    * si la variable $_POST n'est pas vide, tente la connexion,
    * si la connexion échoue, donne la valeur "true" à l'erreur envoyée à la vue,
-   * sinon, si l'utilisateur est administrateur, redirige vers l'index d'administration des posts, sinon vers l'accueil.
-   * @return [type] [description]
+   * sinon, si l'utilisateur est administrateur, redirige vers l'index d'administration des posts, sinon vers l'accueil,
+   * à chaque fois en ajoutant la valeur "loggedin" à la variable $_GET['success'].
    */
   public function login(){
 
@@ -36,10 +36,10 @@ class UsersController extends AppController{
       if($auth->login($_POST['name'], $_POST['pwd'])){
         if($auth->isAdmin()){
 
-          header('location: index.php?page=admin.posts.index');
+          header('location: index.php?page=admin.posts.index&success=loggedin&username=' . $_POST['name']);
         }
         else{
-          header('location: index.php?page=logged.posts.index');
+          header('location: index.php?page=logged.posts.index&success=loggedin&username=' . $_POST['name']);
         }
 
       }

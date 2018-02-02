@@ -1,4 +1,4 @@
-<h1>Commentaires liés à <?= $post->title ?></h1>
+<h1>Commentaires signalés liés à <?= $post->title ?></h1>
 
 <table class="table">
   <thead>

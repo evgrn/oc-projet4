@@ -1,3 +1,4 @@
+<?php require ROOT . '/app/Views/templates/alerts.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

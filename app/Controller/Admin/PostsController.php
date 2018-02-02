@@ -12,23 +12,23 @@ class PostsController extends AppController{
   /**
    * Charge les constructeurs parents (choisit la navnar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
    * Charge les instances des modèles de table "post" et "comment" dans sa propre instance.
-   *
    */
   public function __construct(){
     parent::__construct();
     $this->loadModel('post');
     $this->loadModel('comment');
+    $this->loadModel('report');
   }
 
   /**
-   * Affiche tous les posts ainsi que le nombre de commentaires et de ciommentaires signalés qui leur sont associés
+   * Affiche tous les posts ainsi que le nombre de commentaires et de commentaires signalés qui leur sont associés
    */
   public function index(){
     $posts = $this->post->getAll();
     $that = $this;
     foreach($posts as $post){
-      $post->commentNb = $that->comment->getAttachedCommentAmount($post->id);
-      $post->reportedCommentNb = $that->comment->getReportedAttachedCommentAmount($post->id);
+      $post->commentNb = $that->comment->getAttachedCommentSum($post->id);
+      $post->reportedCommentNb = $that->report->getReportedAttachedCommentSum($post->id);
     }
     $this->render('admin.posts.index', compact('posts', 'commentNb', 'reportedCommentNb'));
   }
@@ -45,7 +45,7 @@ class PostsController extends AppController{
         'content' => $_POST['content']
       ));
       if($result){
-        header('location: index.php?page=admin.posts.index');
+        header('location: index.php?page=admin.posts.index&success=updatedpost');
       }
     }
 
@@ -69,25 +69,25 @@ class PostsController extends AppController{
       ));
 
       if($result){
-      header('location: index.php?page=admin.posts.edit&id=' . App::getInstance()->getDb()->getLastInsertedId());
+      header('location: index.php?page=admin.posts.index&success=addedpost');
       }
     }
 
     $form = new BootstrapForm($_POST);
-
     $this->render('admin.posts.edit', compact('form'));
 
   }
 
   /**
-   * Supprime le post dont l'id est récupéré via la méthode POST
-   * et renvoie vers l'index des posts de la partie admin
-   * en ajoutant la valeur 'deleted' à la variable $_GET['success'].
+   * Supprime le post dont  l'id est récupéré par la méthode POST et les commentaires et signalements qui y sont associés,
+   * puis renvoie vers la page d'administration des posts en donnant la valeur "deletedpost" à la variable $_GET['succes'].
    */
   public function delete(){
     if(!empty($_POST)){
       $this->post->delete($_POST['id']);
-      header('location: index.php?page=admin.posts.index&success=deleted');
+      $this->comment->deleteAttached($_POST['id']);
+      $this->report->deleteAttachedToPost($_POST['id']);
+      header('location: index.php?page=admin.posts.index&success=deletedpost');
     }
   }
 

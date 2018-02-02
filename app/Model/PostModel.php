@@ -20,18 +20,12 @@ class PostModel extends \Core\Model\Model{
    * @return string Extrait du contenu du post et bouton affilié
    */
   public function getExcerpt(){
-    $excerpt = substr($this->content, 0, 1000) . ' (...)';
+    $contentWordsArray = explode(' ', $this->content);
+    $excerptWordsArray = array_slice($contentWordsArray, 0, 30);
+    $excerpt = implode(' ', $excerptWordsArray) . ' ( ...)';
+
     $html = '<p>' . $excerpt . '</p>';
     return $html;
   }
-
-  /**
-   * Renvoie le titre du post.
-   * @return string titre du post
-   */
-  public function getTitle(){
-    return $this->title;
-  }
-
-
+  
 }

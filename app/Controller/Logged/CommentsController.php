@@ -1,5 +1,8 @@
 <?php
-
+##TODO:
+##Modifier report() pour repartir sur la page correspondante
+##
+ 
 namespace App\Controller\Logged;
 use App;
 
@@ -14,21 +17,19 @@ class CommentsController extends AppController{
   public function __construct(){
     parent::__construct();
     $this->loadModel('comment');
+    $this->loadmodel('report');
   }
 
   /**
-   * Ajoute le statut 'signalé' à un commentaire dont l'id est récupéré par la méthode GET
-   * et renvoie vers la page d'où la requête a été générée.
+   * Signale le commentaire correspondant aux variables commentId et postId récupérées via la méthode POST,
+   * puis renvoie vers la page d'index des commentaires correspondant au post lié, donnant la valeur "reportedcomment" à la variable $_GET['success'].
    */
   public function report(){
-      $result = $this->comment->update($_GET['id'], array(
-        'reported' => 1
-      ));
+      $result = $this->report->create(array($_POST['commentId'], $_POST['postId']));
       if($result){
-        header('location: ' . $_SERVER['HTTP_REFERER'] . '&success=reported');
+        header('location: index.php?page=logged.posts.single&id=' . $_POST['postId'] . '&success=reportedcomment');
       }
-
-  }
+}
 
 
 }
