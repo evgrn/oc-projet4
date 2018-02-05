@@ -33,7 +33,7 @@ class UsersController extends AppController{
     if(!empty($_POST)){
       $auth = new DBAuth(App::getInstance()->getDb());
 
-      if($auth->login($_POST['name'], $_POST['pwd'])){
+      if($auth->login(htmlspecialchars($_POST['name']),htmlspecialchars( $_POST['pwd']))){
         if($auth->isAdmin()){
 
           header('location: index.php?page=admin.posts.index&success=loggedin&username=' . $_POST['name']);
@@ -75,9 +75,9 @@ class UsersController extends AppController{
 
     if(!empty($_POST)){
       $result = $this->user->create(array(
-        'name' => $_POST['name'],
-        'pwd' => sha1($_POST['pwd']),
-        'mail' => $_POST['mail']
+        'name' => htmlspecialchars($_POST['name']),
+        'pwd' => sha1(htmlspecialchars($_POST['pwd'])),
+        'mail' => htmlspecialchars($_POST['mail'])
       ));
 
       if($result === true){

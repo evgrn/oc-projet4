@@ -2,9 +2,9 @@
   <h1 class="comment-title-single"><?= $comment->title ?></h1>
   <?= $comment->reportNotification ?>
   <form action="?page=admin.comments.delete" method="post" class="pull-right">
-    <input type="hidden" name="post-id" value="<?= $post->id ?>">
-    <input type="hidden" name="id" value="<?= $comment->id ?>">
-    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <?= $form->input('post-id', null, $post->id, ['type' => 'hidden']) ?>
+    <?= $form->input('id', null, $comment->id, ['type' => 'hidden']) ?>
+    <?= $form->submit('Supprimer', 'danger')?>
 
   </form>
   <?= $comment->unreport ?>

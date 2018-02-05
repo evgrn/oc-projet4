@@ -5,9 +5,9 @@
 <?php endif; ?>
 <h1>Incription</h1>
 <form method="post">
-  <?= $form->input('name', 'Nom')?>
-  <?= $form->input('mail', 'Mail', ['type' =>'mail']) ?>
-  <?= $form->input('pwd', 'Mot de passe', ['type' =>'password']) ?>
-  <?= $form->input('pwd_confirm', 'Confirmation mot de passe', ['type' =>'password']) ?>
-  <?= $form->submit() ?>
+  <?= $form->input('name', 'Nom', null, ['required' => true])?>
+  <?= $form->input('mail', 'Mail',  null, ['type' =>'mail', 'required' => true]) ?>
+  <?= $form->input('pwd', 'Mot de passe',  null, ['type' =>'password', 'required' => true]) ?>
+  <?= $form->input('pwd_confirm', 'Confirmation mot de passe',  null, ['type' =>'password', 'required' => true]) ?>
+  <?= $form->submit('S\'inscrire') ?>
 </form>

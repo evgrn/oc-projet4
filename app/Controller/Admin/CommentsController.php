@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 use App;
+use \Core\HTML\BootstrapForm;
 
 /**
  * Contrôleur des commentaires pour la partie admin
@@ -31,7 +32,8 @@ class CommentsController extends AppController{
       $comment->reports = $this->report->getAttachedReportSum($comment->id);
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'attached');
     }
-    $this->render('admin.comments.attached', compact('post', 'comments'));
+    $form = new BootstrapForm($_POST);
+    $this->render('admin.comments.attached', compact('post', 'comments', 'form'));
   }
 
   /**
@@ -52,7 +54,8 @@ class CommentsController extends AppController{
       $comment->reports = $this->report->getAttachedReportSum($comment->id);
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'reported');
     }
-    $this->render('admin.comments.reported', compact('post', 'comments'));
+    $form = new BootstrapForm($_POST);
+    $this->render('admin.comments.reported', compact('post', 'comments', 'form'));
   }
 
   /**
@@ -68,7 +71,8 @@ class CommentsController extends AppController{
       $post = $this->post->getSingle($comment->post_id);
       $comment->reportNotification = $this->report->getAttachedReportMessage($comment->id);
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'single');
-      $this->render('admin.comments.single', compact('post', 'comment'));
+      $form = new BootstrapForm($_POST);
+      $this->render('admin.comments.single', compact('post', 'comment', 'form'));
     }
 
   }

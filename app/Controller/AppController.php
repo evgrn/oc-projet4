@@ -16,7 +16,7 @@ abstract class AppController extends Controller{
    * Initialise le système de messages de succès et définit la barre de navigation selon le statut de l'utilisateur
    */
   public function __construct(){
-    $this->successMessagesInit();
+
     $this->navbarSelect();
   }
 
@@ -53,10 +53,15 @@ abstract class AppController extends Controller{
     die($this->render('accessdenied', []));
   }
 
+  protected function render($view, $data = []){
+    $this->initSuccessMessages();
+    parent::render($view, $data);
+
+  }
   /**
    * Si la variable $_GET['success'] n'est pas vide, affiche le message de succès correspondant à son contenu.
    */
-  protected function successMessagesInit(){
+  protected function initSuccessMessages(){
     if(isset($_GET['success'])){
       switch ($_GET['success']) {
           case 'loggedin':
@@ -92,7 +97,7 @@ abstract class AppController extends Controller{
               break;
         }
 
-        $this->render('success', compact('message'));
+        require ROOT . '/app/Views/success.php';
 
     }
   }

@@ -8,23 +8,35 @@ class BootstrapForm extends Form{
     return "<div class=\"form-group\">$item</div>";
   }
 
-  public function input($name, $label, $options = []){
+  public function input($name, $label = null, $value = null, $options = []){
+    $inputValue = $value != null ? $value : $this->getValue($name);
+
+
+
+    $required = (isset($options['required']) && $options['required'] == true) ? 'required' : '';
     $type = isset($options['type']) ? $options['type'] : 'text';
     if($type === 'textarea'){
-      $input = '<textarea  name="' . $name . '" class="form-control"> ' . $this->getValue($name) . '</textarea>';
-    }else{
-      $input = '<input type="' . $type . '" name="' . $name . '" value="' . $this->getValue($name) .'" class="form-control">';
+      $input = '<textarea  name="' . $name . '" class="form-control" ' . $required . ' > ' . $inputValue . '</textarea>';
+    }else {
+      $input = '<input type="' . $type . '" name="' . $name . '" value="' .  $inputValue .'" class="form-control" ' . $required . '>';
     }
-    $label = '<label class="form-label">' . $label . '</label>';
 
-    $content = $label . $input;
+    if($label === null){
+      return $this->surround($input);
+    }
+
+      $label = '<label class="form-label">' . $label . '</label>';
+
+      $content = $label . $input;
+
+
 
     return $this->surround($content);
 
   }
 
-  public function submit(){
-    $content =  '<button type="submit" class="btn btn-primary">Envoyer</button>';
+  public function submit($title = 'Envoyer', $buttonColor = 'primary'){
+    $content =  '<button type="submit" class="btn btn-' . $buttonColor . '">' . $title . '</button>';
     return $content;
   }
 

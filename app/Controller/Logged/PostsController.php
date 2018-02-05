@@ -43,9 +43,9 @@ class PostsController extends AppController{
     else{
       if(!empty($_POST)){
         $result = $this->comment->create(array(
-          'title' => $_POST['title'],
+          'title' => htmlspecialchars($_POST['title']),
           'content' => $_POST['content'],
-          'post_id' => $_POST['post_id'],
+          'post_id' => htmlspecialchars($_POST['post_id']),
           'author' => $_SESSION['userName'],
         ));
 

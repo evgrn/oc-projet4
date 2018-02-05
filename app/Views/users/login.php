@@ -5,7 +5,7 @@
 <?php endif; ?>
 <h1>Connexion</h1>
 <form method="post">
-  <?= $form->input('name', 'Identifiant')?>
-  <?= $form->input('pwd', 'Mot de passe', ['type' =>'password']) ?>
-  <?= $form->submit() ?>
+  <?= $form->input('name', 'Identifiant', null, ['required' => true])?>
+  <?= $form->input('pwd', 'Mot de passe', null,['type' =>'password', 'required' => true]) ?>
+  <?= $form->submit('Envoyer') ?>
 </form>

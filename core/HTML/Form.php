@@ -39,9 +39,9 @@ class Form{
   */
   protected function getValue($index){
     if(is_object($this->data)){
-      return $this->data->$index;
+      return htmlspecialchars($this->data->$index);
     }
-    return isset($this->data[$index]) ? $this->data[$index] : null;
+    return isset($this->data[$index]) ? htmlspecialchars($this->data[$index]) : null;
   }
 
   /**

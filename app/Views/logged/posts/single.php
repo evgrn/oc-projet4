@@ -7,11 +7,11 @@
 <aside class="comments">
   <h2 class="comments-title">Commentaires <span class="comments-sum">(<?= $commentAmount ?>)</span></h2>
   <h3>Votre commentaire</h3>
-  <form method="post" class="comment-form">
-    <?= $form->input('title', 'Titre')?>
-    <?= $form->input('content', 'Contenu', ['type' =>'textarea']) ?>
-    <input type="hidden" name="post_id" value="<?= $_GET['id'] ?>">
-    <input type="hidden" name="user_id" value="<?= $_SESSION['userName'] ?>">
+  <form method="post" class="comment-form" id="comment-form">
+    <?= $form->input('title', 'Titre', null, ['required' => true])?>
+    <?= $form->input('content', 'Contenu', null, ['type' =>'textarea', 'required' => true]) ?>
+    <?= $form->input('post_id', null, htmlspecialchars($_GET['id']), ['type' => 'hidden']) ?>
+    <?= $form->input('user_id', null, htmlspecialchars($_SESSION['userName']), ['type' => 'hidden']) ?>
 
     <?= $form->submit() ?>
   </form>

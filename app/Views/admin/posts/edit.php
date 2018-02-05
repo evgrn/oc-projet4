@@ -1,6 +1,6 @@
 
-<form method="post">
-  <?= $form->input('title', 'Titre')?>
-  <?= $form->input('content', 'Contenu', ['type' =>'textarea']) ?>
-  <?= $form->submit() ?>
+<form method="post" id="post-form">
+  <?= $form->input('title', 'Titre', null)?>
+  <?= $form->input('content', 'Contenu', null, ['type' =>'textarea']) ?>
+  <?= $form->submit('Sauvegarder', 'success') ?>
 </form>
