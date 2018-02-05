@@ -2,13 +2,13 @@
 define('ROOT', dirname(__DIR__));
 require ROOT . '/app/App.php';
 App::init();
-$auth = new \Core\Auth\DBAuth(App::getInstance()->getDb());
+$auth = new \Core\Auth\DBAuth(App::getInstance()->getDb()); // utile ?
 
 
 
 // Routeur
 function checkPage(){
-  $pathCategories = ['home', 'admin', 'logged', 'users'];
+  $pathCategories = ['home', 'admin', 'logged', 'users', 'guest'];
   $results = false;
   $pathCategoriesSum =  sizeof($pathCategories);
   $path = explode('.', $_GET['page']);
@@ -17,7 +17,7 @@ function checkPage(){
 
     for ($i = 0; $i < $pathCategoriesSum; $i++){
       if($pathCategories[$i] === $path[0]){
-        if($path[0] == 'admin' || $path[0] == 'logged'){
+        if($path[0] == 'admin' || $path[0] == 'logged' || $path[0] == 'guest'){
           if(sizeof($path) == 3 ){
             if($path[1] == 'comments' || $path[1] == 'posts'){
               return true;
