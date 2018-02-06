@@ -33,7 +33,8 @@ class CommentsController extends AppController{
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'attached');
     }
     $form = new BootstrapForm($_POST);
-    $this->render('admin.comments.attached', compact('post', 'comments', 'form'));
+    $pageTitle = $this->completeTitle('Commentaires de "' . $post->title . '"');
+    $this->render('admin.comments.attached', compact('post', 'comments', 'form', 'pageTitle'));
   }
 
   /**
@@ -55,7 +56,8 @@ class CommentsController extends AppController{
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'reported');
     }
     $form = new BootstrapForm($_POST);
-    $this->render('admin.comments.reported', compact('post', 'comments', 'form'));
+    $pageTitle = $this->completeTitle('Commentaires signalés de "' . $post->title . '"');
+    $this->render('admin.comments.reported', compact('post', 'comments', 'form', 'pageTitle'));
   }
 
   /**
@@ -72,7 +74,8 @@ class CommentsController extends AppController{
       $comment->reportNotification = $this->report->getAttachedReportMessage($comment->id);
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'single');
       $form = new BootstrapForm($_POST);
-      $this->render('admin.comments.single', compact('post', 'comment', 'form'));
+      $pageTitle = $this->completeTitle('"' .$comment->title . '"');
+      $this->render('admin.comments.single', compact('post', 'comment', 'form', 'pageTitle'));
     }
 
   }

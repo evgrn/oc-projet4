@@ -17,8 +17,18 @@ class PostTable extends \Core\Table\Table{
    * @return array       Tableau regroupant les objets demandés par ordre décroissant de nouveauté
    */
   public function getLast($number){
-    return $this->query("SELECT * FROM " . $this->table . "
+    return $this->query("SELECT id, title, content, DATE_FORMAT(date, 'le %d/%m/%Y à %Hh%i') AS date FROM " . $this->table . "
         ORDER BY id DESC LIMIT " . $number);
   }
+
+  public function getAll(){
+      return $this->query("SELECT id, title, content, DATE_FORMAT(date, 'le %d/%m/%Y à %Hh%i') AS date FROM " . $this->table . ' ORDER BY id DESC' );
+    }
+
+    public function getSingle($id){
+      return $this->query("SELECT id, title, content, DATE_FORMAT(date, 'le %d/%m/%Y à %Hh%i') AS date FROM " . $this->table . " WHERE id = ?",
+          [$id],
+          true);
+    }
 
 }

@@ -7,10 +7,15 @@ use App;
 /**
  * Classe mère de tous les contrôleurs de la partie App.
  */
-abstract class AppController extends Controller{
+class AppController extends Controller{
 
   protected $viewsPath = ROOT . '/app/Views/';
   protected $template = 'default';
+  protected $siteTitle = ' | Billet Simple pour l\'Alaska';
+
+  protected function completeTitle($subtitle){
+    return $subtitle . $this->siteTitle;
+  }
 
   /**
    * Initialise le système de messages de succès et définit la barre de navigation selon le statut de l'utilisateur
@@ -89,6 +94,9 @@ abstract class AppController extends Controller{
               break;
           case 'unreportedcomment':
               $message = 'Le signalement du commentaire a bien été supprimé.';
+              break;
+          case 'registered':
+              $message = 'Votre inscription est à présent effective. Veuillez vous connecter pour lire et écrire des commentaires.';
               break;
           case 'updatedpost':
               $message = 'Le chapitre a bien été modifié.';

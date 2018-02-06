@@ -4,10 +4,13 @@ namespace App\Controller;
 use \App;
 use \Core\Auth\DBAuth;
 
+
 /**
  * Contrôleur de la partie Home
  */
 class HomeController extends AppController{
+
+
 
   /**
    * Charge le constructeur parent (choisit la navnar en fonction du type d'tilisateur),
@@ -22,7 +25,10 @@ class HomeController extends AppController{
    * Affiche la vue correspondante à la page d'accueil.
    */
   public function index(){
-    $this->render('home.index', []);
+
+    $pageTitle = $this->completeTitle('Accueil');
+
+    $this->render('home.index', compact('pageTitle'));
   }
 
 

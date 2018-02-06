@@ -26,7 +26,8 @@ class PostsController extends AppController{
       header('location: index.php?page=logged.posts.index');
     }
     $posts = $this->post->getLast(4);
-    $this->render('guest.posts.index', compact('posts'));
+    $pageTitle = $this->completeTitle('Derniers chapitres');
+    $this->render('guest.posts.index', compact('posts', 'pageTitle'));
   }
 
   /**
@@ -43,8 +44,8 @@ class PostsController extends AppController{
     }
     else{
       $commentAmount = $this->comment->getAttachedCommentSum($_GET['id'], false);
-
-      $this->render('guest.posts.single', compact('post', 'comments', 'commentAmount', 'form'));
+      $pageTitle = $this->completeTitle($post->title);
+      $this->render('guest.posts.single', compact('post', 'comments', 'commentAmount', 'form', 'pageTitle'));
     }
 
   }
@@ -58,7 +59,8 @@ class PostsController extends AppController{
       header('location: index.php?page=logged.posts.list');
     }
     $posts = $this->post->getAll();
-    $this->render('guest.posts.list', compact('posts'));
+    $pageTitle = $this->completeTitle('Liste des chapitres');
+    $this->render('guest.posts.list', compact('posts', 'pageTitle'));
   }
 
 }

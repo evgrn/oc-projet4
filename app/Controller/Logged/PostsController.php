@@ -25,7 +25,8 @@ class PostsController extends AppController{
    */
   public function index(){
     $posts = $this->post->getLast(4);
-    $this->render('logged.posts.index', compact('posts'));
+    $pageTitle = $this->completeTitle('Derniers chapitres');
+    $this->render('logged.posts.index', compact('posts', 'pageTitle'));
   }
 
   /**
@@ -62,7 +63,8 @@ class PostsController extends AppController{
       }
 
       $form = new \Core\HTML\BootstrapForm();
-      $this->render('logged.posts.single', compact('post', 'comments', 'commentAmount', 'form'));
+      $pageTitle = $this->completeTitle($post->title);
+      $this->render('logged.posts.single', compact('post', 'comments', 'commentAmount', 'form', 'pageTitle'));
     }
 
   }
@@ -73,7 +75,8 @@ class PostsController extends AppController{
    */
   public function list(){
     $posts = $this->post->getAll();
-    $this->render('logged.posts.list', compact('posts'));
+    $pageTitle = $this->completeTitle('Liste des chapitres');
+    $this->render('logged.posts.list', compact('posts', 'pageTitle'));
   }
 
 }

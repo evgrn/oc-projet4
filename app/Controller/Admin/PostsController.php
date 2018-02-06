@@ -30,7 +30,8 @@ class PostsController extends AppController{
       $post->commentNb = $that->comment->getAttachedCommentSum($post->id);
       $post->reportedCommentNb = $that->report->getReportedAttachedCommentSum($post->id);
     }
-    $this->render('admin.posts.index', compact('posts', 'commentNb', 'reportedCommentNb'));
+    $pageTitle = $this->completeTitle('Administration - index');
+    $this->render('admin.posts.index', compact('posts', 'commentNb', 'reportedCommentNb', 'pageTitle'));
   }
 
   /**
@@ -51,8 +52,8 @@ class PostsController extends AppController{
 
     $post = $this->post->getSingle(htmlspecialchars($_GET['id']));
     $form = new BootstrapForm($post);
-
-    $this->render('admin.posts.edit', compact('form', 'success'));
+    $pageTitle = $this->completeTitle('Editer un chapitre');
+    $this->render('admin.posts.edit', compact('form', 'success', 'pageTitle'));
   }
 
   /**
@@ -74,7 +75,8 @@ class PostsController extends AppController{
     }
 
     $form = new BootstrapForm($_POST);
-    $this->render('admin.posts.edit', compact('form'));
+    $pageTitle = $this->completeTitle('Nouveau chapitre');
+    $this->render('admin.posts.edit', compact('form', 'pageTitle'));
 
   }
 

@@ -13,9 +13,15 @@ class CommentTable extends \Core\Table\Table{
    * @return array       Liste des commentaires liés au post
    */
   public function getAttachedComments($id){
-    return $this->query("SELECT * FROM " . $this->table . " WHERE post_id = ? ORDER BY id DESC",
+    return $this->query("SELECT id, post_id, author, title, content, DATE_FORMAT(date, 'le %d/%m/%Y à %Hh%i') AS date FROM " . $this->table . " WHERE post_id = ? ORDER BY id DESC",
         [$id],
         false);
+  }
+
+  public function getSingle($id){
+    return $this->query("SELECT id, post_id, author, title, content, DATE_FORMAT(date, 'le %d/%m/%Y à %Hh%i') AS date FROM " . $this->table . " WHERE id = ?",
+        [$id],
+        true);
   }
 
 
@@ -38,7 +44,7 @@ class CommentTable extends \Core\Table\Table{
 
   /**
    * Supprime tous les commentaires liés au post dont l'id est entré en paramètre.
-   * @param  int $id    Id du post 
+   * @param  int $id    Id du post
    */
   public function deleteAttached($id){
       $this->query("DELETE FROM {$this->table} WHERE post_id = ?", [$id]);

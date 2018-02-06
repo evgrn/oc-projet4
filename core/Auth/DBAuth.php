@@ -40,7 +40,8 @@ class DBAuth{
     $usr = $this->db->prepare('SELECT * FROM users WHERE name = ?', [$usrname], null, true);
 
     if($usr){
-      if($usr->pwd == sha1($pwd)){
+    
+      if(password_verify($pwd, $usr->pwd)){
         $_SESSION['loggedAs'] = $usr->id;
         $_SESSION['userType'] = $usr->user_type;
         $_SESSION['userName'] = $usr->name;

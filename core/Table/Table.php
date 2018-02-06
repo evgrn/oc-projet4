@@ -43,7 +43,7 @@ abstract class Table{
    * @return array   Ensemble des lignes de la table
    */
   public function getAll(){
-      return $this->query("SELECT * FROM " . $this->table );
+      return $this->query("SELECT * FROM " . $this->table . ' ORDER BY id DESC' );
     }
 
   /**

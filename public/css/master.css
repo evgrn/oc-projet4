@@ -1,5 +1,5 @@
 body{
-  padding-top: 60px;
+  padding-top: 90px;
 }
 
 @media only screen and (min-width: 768px) and (orientation: landscape){
@@ -12,5 +12,37 @@ body{
     display: inline-block;
     line-height: 30px;
   }
-  
+
+}
+
+.alert{
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  opacity: 0;
+  text-align: center;
+  animation-name: disappear;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes disappear{
+  O%{
+    opacity: 0;
+    right: 0;
+  }
+  25%{
+    right : 0;
+    opacity: 1;
+  }
+  65%{
+    right: 0;
+    opacity: 1;
+  }
+
+  100%{
+    right: 100%;
+    opacity: 0;
+
+  }
 }

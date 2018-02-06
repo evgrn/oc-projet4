@@ -49,8 +49,8 @@ class UsersController extends AppController{
     }
 
     $form = new BootstrapForm($_POST);
-
-    $this->render('users.login', compact('form', 'error'));
+    $pageTitle = $this->completeTitle('Connexion');
+    $this->render('users.login', compact('form', 'error', 'pageTitle'));
   }
 
   /**
@@ -76,7 +76,7 @@ class UsersController extends AppController{
     if(!empty($_POST)){
       $result = $this->user->create(array(
         'name' => htmlspecialchars($_POST['name']),
-        'pwd' => sha1(htmlspecialchars($_POST['pwd'])),
+        'pwd' => password_hash($_POST['pwd'], PASSWORD_DEFAULT),
         'mail' => htmlspecialchars($_POST['mail'])
       ));
 
@@ -93,7 +93,8 @@ class UsersController extends AppController{
     }
 
     $form = new BootstrapForm($_POST);
-    $this->render('users.register', compact('form', 'error'));
+    $pageTitle = $this->completeTitle('Inscription');
+    $this->render('users.register', compact('form', 'error', 'pageTitle'));
   }
 
 }

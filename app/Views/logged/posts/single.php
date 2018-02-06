@@ -15,13 +15,16 @@
 
     <?= $form->submit() ?>
   </form>
-  <?php foreach($comments as $comment): ?>
-  <div class="comment">
-    <h3 class="comment-title"><?= $comment->title ?></h3>
-    <?= $comment->reportItem ?>
-    <p class="comment-details">Par <?= $comment->author ?>, le <?= $comment->date ?></p>
-    <p class="comment-content"><?= $comment->content ?></p>
+  <div class="comments-list">
+    <?php foreach($comments as $comment): ?>
+    <div class="comment" id="comment-<?= $comment->id ?>">
+      <h3 class="comment-title"><?= $comment->title ?></h3>
+      <?= $comment->reportItem ?>
+      <p class="comment-details">Par <?= $comment->author ?>, le <?= $comment->date ?></p>
+      <p class="comment-content"><?= $comment->content ?></p>
+    </div>
+  <?php endforeach; ?>
   </div>
-<?php endforeach; ?>
+
 
 </aside>

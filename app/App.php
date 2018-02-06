@@ -17,10 +17,12 @@ class App{
    */
   public static function init(){
     session_start();
+
     require ROOT . "/Core/Autoloader.php";
     Core\Autoloader::register();
     require ROOT . "/app/Autoloader.php";
     App\Autoloader::register();
+  
 
   }
 
@@ -61,21 +63,7 @@ class App{
 
 
 
-  /**
-   * Affiche le titre.
-   * @return string Titre contenu dans la classe courante
-   */
-  public function getPageTitle(){
-    return $this->title;
-  }
 
-  /**
-   * Définit le sous-titre dans la classe courante.
-   * @param string $subtitle Sous-titre
-   */
-  public function setPageSubtitle($subtitle){
-    $this->title = $subtitle . ' | ' . $this->title ;
-  }
 
 
 

@@ -11,4 +11,8 @@ Créer une table unreported et les classes liées
 accessdenied.php die, solution suffisante ?
 
 htmlspecialchars et execute, protection suffisante ?
-order by 
+order by
+
+routeur convenable ?
+
+scripts dans l'index ou dans le template ?
