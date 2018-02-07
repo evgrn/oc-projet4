@@ -3,7 +3,10 @@ namespace App;
 
 class Router{
 
-
+  /**
+   * Vérifie si le schéma de la valeur $_GET['page'] est supporté.
+   * @return bool Renvoie true si oui, false sinon.
+   */
   private static function checkPage(){
     $pathCategories = ['home', 'admin', 'logged', 'users', 'guest'];
     $results = false;
@@ -35,9 +38,10 @@ class Router{
 
   }
 
+  /**
+   * Instancie le contrôleur correspondant et sa méthode demandée en fonction de la variable $_GET['page'].
+   */
   public static function route(){
-
-
     if(isset($_GET['page'])){
         if(self::checkPage()){
           $page = $_GET['page'];

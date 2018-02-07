@@ -13,15 +13,18 @@ class AppController extends Controller{
   protected $template = 'default';
   protected $siteTitle = ' | Billet Simple pour l\'Alaska';
 
+  /**
+   * Ajoute un sous-titre au titre de la page.
+   * @param  string $subtitle sous-titre de la page
+   */
   protected function completeTitle($subtitle){
     return $subtitle . $this->siteTitle;
   }
 
   /**
-   * Initialise le système de messages de succès et définit la barre de navigation selon le statut de l'utilisateur
+   * Définit la barre de navigation selon le statut de l'utilisateur lors de la construction.
    */
   public function __construct(){
-
     $this->navbarSelect();
   }
 
@@ -51,22 +54,50 @@ class AppController extends Controller{
   }
 
   /**
-   * Interdit l'accès à la page demandée en affichant la page accessdenied.php.
+   * Interdit l'accès à la page demandée en affichant la vue accessdenied.php.
    */
   protected function forbidden(){
     header('HTTP/1.0 403 Forbidden');
-    die($this->render('accessdenied', []));
+    $pageTitle = $this->completeTitle('Accès interdit');
+    die($this->render('accessdenied', compact('pageTitle')));
   }
 
+  /**
+   * Affiche la page vue notfound.
+   */
+  public function notFound(){
+    $pageTitle = $this->completeTitle('Page non trouvée');
+    $this->render('notfound',compact('pageTitle'));
+  }
+  /**
+   * Récupère le chemin de la vue et un tableau contenant les données à y insérer, et génère la vue,
+   * affiche un message de succès le cas échéant,
+   * affiche la navbar selon le statut de l'utilisateur.
+   * @param  string $view  Chemin de la vue
+   * @param  array  $data  Données à passer à la vue
+   */
   protected function render($view, $data = []){
-    $this->initSuccessMessages();
-    parent::render($view, $data);
+    extract($data);
+    $successMessage = $this->getSuccessMessage();
 
+    $viewPath = $this->viewsPath . str_replace('.', '/', $view) . '.php';
+    $containerClass = str_replace('.', '-', $view);
+    ob_start();
+    require($viewPath);
+    $content = ob_get_clean();
+
+    $navViewPath = $this->viewsPath . 'templates/navbar/' . $this->navbar . '.php';
+    ob_start();
+    require($navViewPath);
+    $navbar = ob_get_clean();
+
+    require($this->viewsPath . 'templates/' . $this->template . '.php');
   }
+
   /**
    * Si la variable $_GET['success'] n'est pas vide, affiche le message de succès correspondant à son contenu.
    */
-  protected function initSuccessMessages(){
+  protected function getSuccessMessage(){
     if(isset($_GET['success'])){
       switch ($_GET['success']) {
           case 'loggedin':

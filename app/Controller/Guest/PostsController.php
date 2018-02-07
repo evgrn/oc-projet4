@@ -31,28 +31,31 @@ class PostsController extends AppController{
   }
 
   /**
-   * Réucupère le post dont l'id est récupéré via la méthode GET et affiche la vue correspondante
+   * Réucupère le post dont l'id est récupéré via la méthode GET et affiche la vue correspondante,
+   * si l'utilisateur est connecté, renvoie vers la version "logged" de la page.
    */
   public function single(){
     if($this->auth->isLogged()){
       header('location: index.php?page=logged.posts.single&id=' . $_GET['id']);
     }
     $post = $this->post->getSingle($_GET['id']);
+
     if($post === false){
       $this->notFound();
       return;
     }
     else{
+      $nextPost = $this->post->getNextPost(htmlspecialchars($_GET['id']));
       $commentAmount = $this->comment->getAttachedCommentSum($_GET['id'], false);
       $pageTitle = $this->completeTitle($post->title);
-      $this->render('guest.posts.single', compact('post', 'comments', 'commentAmount', 'form', 'pageTitle'));
+      $this->render('guest.posts.single', compact('post', 'comments', 'commentAmount', 'form', 'nextPost', 'pageTitle'));
     }
 
   }
 
   /**
-   * Réucupère la liste des posts
-   * et l'affiche dans la vue correspondante,
+   * Réucupère la liste des posts et l'affiche dans la vue correspondante,
+   * si l'utilisateur est connecté, renvoie vers la version "logged" de la page.
    */
   public function list(){
     if($this->auth->isLogged()){

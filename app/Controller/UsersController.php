@@ -11,7 +11,7 @@ use \Core\HTML\BootstrapForm;
 class UsersController extends AppController{
 
   /**
-   * Charge le constructeur parent (choisit la navnar en fonction du type d'tilisateur),
+   * Charge le constructeur parent (choisit la navbar en fonction du type d'tilisateur),
    * charge le modèle de table "user" dans sa propre instance. // utile ?
    */
   public function __construct(){

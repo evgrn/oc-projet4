@@ -92,7 +92,7 @@ class ReportTable extends \Core\Table\Table{
     $unreportForm .= '<input type="hidden" name="commentId" value="' .  $commentId . '">';
     $unreportForm .= '<input type="hidden" name="postId" value="' . $postId .'">';
     $unreportForm .= '<input type="hidden" name="originPage" value="' . $originPage .'">';
-    $unreportForm .= '<button type="submit" class="btn btn-warning ">Annuler signalement</button>';
+    $unreportForm .= '<button type="submit" class="btn btn-warning "><i class="fas fa-flag"></i></button>';
     $unreportForm .=   '</form>';
 
     return $unreportForm;
@@ -117,25 +117,25 @@ class ReportTable extends \Core\Table\Table{
     return $this->query("DELETE FROM " . $this->table . ' WHERE comment_id = ?', [$commentId]);
     }
 
-    /**
-     *  Affiche, si le commentaire dont l'id est passé en paramètre n'a pas été signalé par l'utilisateur dont l'Id est récupéré via la variable $_SESSION['loggedAs'], un bouton de signalement.
-     * @param  int      $commentId  Id du commentaire
-     * @param  int      $postId     Id du post
-     * @return string               Si le commentaire n'a pas été signalé par l'autetr, affiche un formulaire de signalement dont seul le bouton de soumission est visible
-     * et dont les champs cachés ont pour valeurs les paramètres entrés;
-     */
+  /**
+   *  Affiche, si le commentaire dont l'id est passé en paramètre n'a pas été signalé par l'utilisateur dont l'Id est récupéré via la variable $_SESSION['loggedAs'], un bouton de signalement.
+   * @param  int      $commentId  Id du commentaire
+   * @param  int      $postId     Id du post
+   * @return string               Si le commentaire n'a pas été signalé par l'autetr, affiche un formulaire de signalement dont seul le bouton de soumission est visible
+   * et dont les champs cachés ont pour valeurs les paramètres entrés;
+   */
   public function getReportButton($commentId, $postId){
 
-        if($this->query("SELECT COUNT(*) FROM {$this->table} WHERE comment_id = ? AND user_id = ?", [$commentId, $_SESSION['loggedAs']], true) === 0){
-          $reportForm = '<form action="?page=logged.comments.report" method="post">';
-          $reportForm .= '<input type="hidden" name="commentId" value="' .  $commentId . '">';
-          $reportForm .= '<input type="hidden" name="postId" value="' . $postId .'">';
-          $reportForm .= '<button type="submit" class="btn btn-danger pull-right">Singaler</button>';
-          $reportForm .=   '</form>';
-          return $reportForm;
-          }
-      return '<p class="pull-right"><strong>Commentaire signalé</strong><br/>En attente de modération</p>';
-    }
+    if($this->query("SELECT COUNT(*) FROM {$this->table} WHERE comment_id = ? AND user_id = ?", [$commentId, $_SESSION['loggedAs']], true) === 0){
+      $reportForm = '<form action="?page=logged.comments.report" method="post">';
+      $reportForm .= '<input type="hidden" name="commentId" value="' .  $commentId . '">';
+      $reportForm .= '<input type="hidden" name="postId" value="' . $postId .'">';
+      $reportForm .= '<button type="submit" class="btn btn-danger">Singaler</button>';
+      $reportForm .=   '</form>';
+      return $reportForm;
+      }
+      return '<p class=""><strong>Commentaire signalé</strong><br/>En attente de modération</p>';
+  }
 
   /**
    * Supprime tous les signalements liés au post dont l'id est entré en paramètre en supprimant les entrées correspondantes dans la table "reports".

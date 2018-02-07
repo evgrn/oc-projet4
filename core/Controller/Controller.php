@@ -10,6 +10,7 @@ abstract class Controller{
   protected $template;
   protected $navbar = 'default';
 
+
   /**
    * Renvoie la page notfound si une méthode qui n'existe pas est appelée.
    * @param  string                         $method        nom de la méthode
@@ -27,7 +28,9 @@ abstract class Controller{
    */
   protected function render($view, $data = []){
     extract($data);
+
     $viewPath = $this->viewsPath . str_replace('.', '/', $view) . '.php';
+    $containerClass = str_replace('.', '-', $view);
     ob_start();
     require($viewPath);
     $content = ob_get_clean();

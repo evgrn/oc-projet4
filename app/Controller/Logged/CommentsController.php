@@ -11,8 +11,8 @@ use App;
  */
 class CommentsController extends AppController{
   /**
-   * Charge les constructeur parents (choisit la navnar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
-   * charge le modèle de table "comment".
+   * Charge les constructeur parents (choisit la navbnar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
+   * charge les modèles de table "comment" et "report".
    */
   public function __construct(){
     parent::__construct();
@@ -29,7 +29,7 @@ class CommentsController extends AppController{
       if($result){
         header('location: index.php?page=logged.posts.single&id=' . htmlspecialchars($_POST['postId']) . '&success=reportedcomment');
       }
-}
+  }
 
 
 }

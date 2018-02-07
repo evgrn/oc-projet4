@@ -22,7 +22,7 @@ class App{
     Core\Autoloader::register();
     require ROOT . "/app/Autoloader.php";
     App\Autoloader::register();
-  
+
 
   }
 
@@ -60,15 +60,5 @@ class App{
     }
     return self::$_instance;
   }
-
-
-
-
-
-
-
-
-
-
 
 }

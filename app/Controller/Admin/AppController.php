@@ -7,7 +7,7 @@ use \Core\Auth\DBAuth;
  * Classe mère des contrôleurs de la partie admin
  *
  */
-abstract class AppController extends \App\Controller\AppController{
+class AppController extends \App\Controller\AppController{
 
   /**
    * Charge le constructeur parent (choisit la navnar en fonction du type d'tilisateur),

@@ -1,4 +1,8 @@
 $(function(){
+
+  /**
+   * Initialisatoin de tynyMCE pour le formulaire de commentaires
+   */
   tinymce.init({
    selector: "#comment-form textarea",
    menubar: false,
@@ -10,6 +14,9 @@ $(function(){
    toolbar: 'insert | undo redo | bold italic | bullist numlist outdent indent | removeformat | help',
   });
 
+  /**
+   * Initialisatoin de tynyMCE pour le formulaire d'édition de chapitres.
+   */
   tinymce.init({
    selector: "#post-form textarea",
    menubar: false,

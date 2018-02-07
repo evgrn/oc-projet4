@@ -26,43 +26,53 @@ class CommentsController extends AppController{
    * et génère la vue associée.
    */
   public function attached(){
+    $titleAddition= '';
     $post = $this->post->getSingle($_GET['id']);
     $comments = $this->comment->getAttachedComments($_GET['id']);
+    $noCommentMessage = $comments ? '' : '<p class="help-block">Aucun commentaire à afficher</p>';
+
     foreach($comments as $comment){
       $comment->reports = $this->report->getAttachedReportSum($comment->id);
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'attached');
     }
+
     $form = new BootstrapForm($_POST);
     $pageTitle = $this->completeTitle('Commentaires de "' . $post->title . '"');
-    $this->render('admin.comments.attached', compact('post', 'comments', 'form', 'pageTitle'));
+
+    $this->render('admin.comments.attached', compact('noCommentMessage', 'post', 'comments', 'form',  'titleAddition', 'pageTitle'));
   }
 
   /**
   * Récupère les commentaires signalés liés à l'id d'un post récupéré par la méthode GET
   * et génère la vue associée.
-   */
+  */
   public function reported(){
+    $titleAddition= 'signalés';
     $post = $this->post->getSingle($_GET['id']);
     $allComments = $this->comment->getAttachedComments($_GET['id']);
     $attachedReports = $this->report->getAllReportedAttachedCommentsId($_GET['id']);
+    // Récupération des commentaires ayant été singalés
     $comments = [];
     foreach($allComments as $comment){
       if(in_array($comment->id, $attachedReports)){
         $comments[] = $comment;
       }
     }
+    $noCommentMessage = $comments ? '' : '<p class="help-block">Aucun commentaire à afficher</p>';
+
     foreach($comments as $comment){
       $comment->reports = $this->report->getAttachedReportSum($comment->id);
       $comment->unreport = $this->report->getUnReportButton($comment->id, $post->id, 'reported');
     }
+
     $form = new BootstrapForm($_POST);
     $pageTitle = $this->completeTitle('Commentaires signalés de "' . $post->title . '"');
-    $this->render('admin.comments.reported', compact('post', 'comments', 'form', 'pageTitle'));
+    $this->render('admin.comments.attached', compact('noCommentMessage', 'post', 'comments', 'form', 'titleAddition', 'pageTitle'));
   }
 
   /**
    * Récupère un commentaire via son id récupéré par la méthode GET
-   * et génère la vue associée.
+   * et génère la vue associée, s'il n'existe pas, renvoie la page notfound.
    */
   public function single(){
     $comment = $this->comment->getSingle($_GET['id']);
@@ -90,8 +100,7 @@ class CommentsController extends AppController{
       header('location: index.php?page=admin.comments.single&id=' . $_POST['commentId'] . '&success=unreportedcomment');
     }else{
     header('location: index.php?page=admin.comments.' . $_POST['originPage'] . '&id=' . $_POST['postId'] . '&success=unreportedcomment');
-
-}
+    }
   }
 
   /**

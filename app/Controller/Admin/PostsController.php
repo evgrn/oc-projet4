@@ -11,7 +11,7 @@ class PostsController extends AppController{
 
   /**
    * Charge les constructeurs parents (choisit la navnar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
-   * Charge les instances des modèles de table "post" et "comment" dans sa propre instance.
+   * Charge les instances des modèles de table "post", "comment" et "comment" dans sa propre instance.
    */
   public function __construct(){
     parent::__construct();

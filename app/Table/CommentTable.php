@@ -18,6 +18,11 @@ class CommentTable extends \Core\Table\Table{
         false);
   }
 
+  /**
+   * Récupère le commentaire dont l'id est passé en paramètre
+   * @param  int $id Id du commentaire
+   * @return \App\Model\CommentModel     Commentaire dont l'id est passé en paramètre
+   */
   public function getSingle($id){
     return $this->query("SELECT id, post_id, author, title, content, DATE_FORMAT(date, 'le %d/%m/%Y à %Hh%i') AS date FROM " . $this->table . " WHERE id = ?",
         [$id],

@@ -9,7 +9,7 @@ use App;
 class PostsController extends AppController{
 
   /**
-   * Charge les constructeur parents (choisit la navnar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
+   * Charge les constructeurs parents (choisit la navbar en fonction du type d'utilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
    * charge les modèles de table "post", "report", et "comment".
    */
   public function __construct(){
@@ -30,13 +30,16 @@ class PostsController extends AppController{
   }
 
   /**
-   * Réucupère le post dont l'id est récupéré via la méthode GET et affiche la vue correspondante
-   * et un formulaire de commentaires;
+   * Récupère le post dont l'id est récupéré via la méthode GET et affiche la vue correspondante
+   * comportant un formulaire de commentaires;
    * si aucun post ne correspond, affiche la page notfound;
    * si la variable POST n'est pas vide, sauvegarde le commentaire.
    */
   public function single(){
-    $post = $this->post->getSingle($_GET['id']);
+    $post = $this->post->getSingle(htmlspecialchars($_GET['id']));
+    $nextPost = $this->post->getNextPost(htmlspecialchars($_GET['id']));
+
+
     if($post === false){
       $this->notFound();
       return;
@@ -64,7 +67,7 @@ class PostsController extends AppController{
 
       $form = new \Core\HTML\BootstrapForm();
       $pageTitle = $this->completeTitle($post->title);
-      $this->render('logged.posts.single', compact('post', 'comments', 'commentAmount', 'form', 'pageTitle'));
+      $this->render('logged.posts.single', compact('post', 'comments', 'commentAmount', 'form', 'nextPost', 'pageTitle'));
     }
 
   }

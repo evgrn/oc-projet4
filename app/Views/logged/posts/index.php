@@ -1,17 +1,23 @@
 
+<header>
+<h1>Derniers chapitres</h1>
+</header>
 
-<h1>Bienvenue sur <strong>Billet Simple pour l'Alaska</strong></h1>
-<p>Je publierai ici chaque semaine une nouvelle page de mon roman éponyme.</p>
-
-
-
-<?php foreach($posts as $post): ?>
-
-  <article class="chapter">
-    <h2 class="chapter-title-index"><?= $post->title ?></h2>
-    <p class="chapter-date-index"><?= $post->date ?></p>
-    <p class="chapter-content-index"><?= $post->excerpt ?></p>
-    <p><a class="btn btn-primary" href="<?=$post->url  ?>">Lire le chapitre</a></p>
-  </article>
-
-<?php endforeach; ?>
+<div class="main-content">
+  <?php foreach($posts as $post): ?>
+    <article class="chapter">
+      <div class="row">
+        <h2 class="chapter-title-index"><?= $post->title ?></h2>
+      </div>
+      <div class="row">
+        <p class="col-sm-2 chapter-date-index"><?= $post->date ?></p>
+      </div>
+      <div class="row">
+          <p class="col-xs-12 chapter-content-index"><?= $post->excerpt ?></p>
+      </div>
+      <div class="row">
+          <a class="col-sm-2 col-sm-offset-10 btn btn-primary " href="<?=$post->url  ?>">Lire le chapitre</a>
+      </div>
+    </article>
+  <?php endforeach; ?>
+</div><!--.main-content-->
