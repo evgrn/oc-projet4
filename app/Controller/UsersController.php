@@ -85,9 +85,9 @@ class UsersController extends AppController{
       }
       else{
         if($result == 'name'){
-          $error = 'Nom d\'utilisateur';
+            header('location: index.php?page=users.register&error=nametaken');
         }elseif($result == 'mail'){
-          $error = 'Adresse mail';
+            header('location: index.php?page=users.register&error=mailtaken');
         }
       }
     }

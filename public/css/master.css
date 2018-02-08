@@ -1,3 +1,26 @@
+/*############ INDEX ###########*/
+/**
+ * GENERAL
+ * NAVBAR
+ * FRONTPAGE
+ * SINGLE
+ * SINGLE - comments
+ * ALERTS
+ * INDEX
+ * ADMIN
+ * ADMIN - tables
+ * ADMIN - single
+ * MEDIA QUERIES
+ * MEDIAQUERIES - général
+ * MEDIAQUERIES - homepage
+ * MEDIAQUERIES - navbar
+ * MEDIAQUERIES - index
+ * MEDIAQUERIES - single
+ * MEDIAQUERIES - admin
+ * MEDIAQUERIES - alerts
+ */
+
+
 /* GENERAL */
 
 body{
@@ -86,8 +109,15 @@ form{
   display: none;
 }
 
+.navbar ul li, .navbar ul li a {
+  transition: all .5s ease;
+}
 .navbar ul li a, .navbar-inverse .navbar-brand{
   color: white;
+}
+
+.navbar ul li:hover a{
+  color: black;
 }
 
 .home-link{
@@ -141,7 +171,7 @@ form{
 }
 
 
-/*SINGLE*/
+/* SINGLE */
 
 .chapter-date-single{
   text-align: right;
@@ -182,7 +212,7 @@ form{
 }
 
 
-/* COMMENTS */
+/* SINGLE - comments */
 
 .comments-title{
   position: relative;
@@ -263,8 +293,7 @@ h3.comment-title{
   }
 }
 
-.success, .alert-danger{
-  background-color: rgba(255, 255, 255, .7);
+.success, .error{
   color: black;
   position: absolute;
   z-index: 10;
@@ -273,11 +302,15 @@ h3.comment-title{
   opacity: 0;
   text-align: center;
   animation-name: disappear;
-  animation-duration: 2s;
+  animation-duration: 3.5s;
   animation-fill-mode: forwards;
 }
 
-.alert-danger{
+.success{
+    background-color: rgba(255, 255, 255, .7);
+}
+
+.error{
   background-color: rgba(220, 0, 10, .5);
   border: none;
   color: white;
@@ -302,7 +335,7 @@ h3.comment-title{
 
 /* ADMIN */
 
-/* admin tables */
+/* ADMIN tables */
 
 table, thead, tbody, td, tr{
 	display: block;
@@ -341,7 +374,7 @@ td:before{
 }
 
 
-/* admin single */
+/* ADMIN single */
 .admin-posts-edit .main-content{
   padding: 10px
 }
@@ -356,7 +389,7 @@ td:before{
 
 @media only screen and (min-width: 768px) and (orientation: landscape){
 
-/* GENERAL */
+/* MEDIAQUERIES - général */
 
   body{
     margin-top: 40px;
@@ -383,7 +416,7 @@ td:before{
   }
 
 
-  /* HOMEPAGE */
+  /* MEDIAQUERIES - homepage */
 
   .front-page-content{
     left: auto;
@@ -393,7 +426,7 @@ td:before{
   }
 
 
-  /* NAVBAR */
+  /* MEDIAQUERIES - navbar */
 
   .navbar{
     min-height: 50px;
@@ -421,13 +454,13 @@ td:before{
   }
 
 
-  /* INDEX */
+  /* MEDIAQUERIES - index */
 
   .chapter-title-index{
     font-size: 1.8em;
   }
 
-  /* SINGLE */
+  /* MEDIAQUERIES - single */
 
   .next-chapter{
     background-image: url('../img/next-chapter-bg.jpg');
@@ -456,7 +489,7 @@ td:before{
   }
 
 
-  /*ADMIN*/
+  /* MEDIAQUERIES - admin */
 
 
   .mobile-table-label{
@@ -509,11 +542,10 @@ td:before{
   }
 
 
-  /* ALERTS */
+  /* MEDIAQUERIES - alerts */
 
   .alert{
-    background-color: rgba(255, 255, 255, .7);
     top: 50px;
   }
-  
+
 }

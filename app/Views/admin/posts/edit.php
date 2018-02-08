@@ -2,7 +2,7 @@
   <h1>Éditeur de chapitres</h1>
 </header>
 
-<div class="main-content row" >
+<div class="main-content" >
   <form method="post" id="post-form">
     <?= $form->input('title', 'Titre', null)?>
     <?= $form->input('content', 'Contenu', null, ['type' =>'textarea']) ?>

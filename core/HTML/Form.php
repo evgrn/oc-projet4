@@ -2,21 +2,15 @@
 namespace Core\HTML;
 
 /**
-* Class Form
 * Permet de générer un formulaire
 */
 class Form{
 
-  /**
-  *@var array Données utilisées par le formulaire
-  */
+
   protected $data;
-  /**
-  *@var string Tag pour entourer les champs
-  */
-  public $surround = 'p';
 
   /**
+   * Récupère les données passées en paramètre et les stocke dans son instance.
   *@param array $data Données utilisées par le formulaire
   *@param string $surround Tag entourat chaque élément du formulaire
   */
@@ -25,17 +19,9 @@ class Form{
   }
 
   /**
-  *@param string $item Element à entourer
-  *@param string $surround
-  *return string
-  */
-  protected function surround($item){
-    return "<{$this->surround}>$item</{$this->surround}>";
-  }
-
-  /**
+  * Récupère les données du tableau stocké dans son instance lors de sa construction.
   *@param string $index Index de l'élément à récupérer dans le tableau data
-  *return string
+  *@return string La valeur du tableau correspondant à l'index
   */
   protected function getValue($index){
     if(is_object($this->data)){
@@ -45,10 +31,11 @@ class Form{
   }
 
   /**
-  *@param string $name
-  *@param $label
-  *@param $options array
-  *return string
+   * Crée un champ input et le label correspondant.
+  *@param string $name Nom du champ
+  *@param string $label Nom du label
+  *@param $options array liste des options du champ
+  *@return string Les chmps créés
   */
   public function input($name, $label, $options =[]){
     $type = isset($options[type]) ? $options[type] : 'text';
@@ -61,7 +48,8 @@ class Form{
 
 
   /**
-  *return string
+   * Génère un bouton submit.
+  *@return string  Un bouton submit
   */
   public function submit(){
     $content =  '<button type="submit">Envoyer</button>';

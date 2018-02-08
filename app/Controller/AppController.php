@@ -57,17 +57,14 @@ class AppController extends Controller{
    * Interdit l'accès à la page demandée en affichant la vue accessdenied.php.
    */
   protected function forbidden(){
-    header('HTTP/1.0 403 Forbidden');
-    $pageTitle = $this->completeTitle('Accès interdit');
-    die($this->render('accessdenied', compact('pageTitle')));
+    die(header('location: index.php?page=home.index&error=forbidden'));
   }
 
   /**
    * Affiche la page vue notfound.
    */
   public function notFound(){
-    $pageTitle = $this->completeTitle('Page non trouvée');
-    $this->render('notfound',compact('pageTitle'));
+    header('location: index.php?page=home.index&error=notfound');
   }
   /**
    * Récupère le chemin de la vue et un tableau contenant les données à y insérer, et génère la vue,
@@ -78,7 +75,7 @@ class AppController extends Controller{
    */
   protected function render($view, $data = []){
     extract($data);
-    $successMessage = $this->getSuccessMessage();
+    $successMessage = $this->getAlert();
 
     $viewPath = $this->viewsPath . str_replace('.', '/', $view) . '.php';
     $containerClass = str_replace('.', '-', $view);
@@ -95,9 +92,10 @@ class AppController extends Controller{
   }
 
   /**
-   * Si la variable $_GET['success'] n'est pas vide, affiche le message de succès correspondant à son contenu.
+   * Si la variable $_GET['success'] n'est pas vide, affiche le message de succès correspondant à son contenu,
+   * Si la variable $_GET['error'] n'est pas vide, affiche le message d'erreur correspondant à son contenu.
    */
-  protected function getSuccessMessage(){
+  protected function getAlert(){
     if(isset($_GET['success'])){
       switch ($_GET['success']) {
           case 'loggedin':
@@ -138,6 +136,29 @@ class AppController extends Controller{
 
         require ROOT . '/app/Views/success.php';
 
+    }
+
+    else if(isset($_GET['error'])){
+      switch ($_GET['error']) {
+          case 'forbidden':
+              $message = "Vous n'avez pas l'autorisation d'accéder à cette page.";
+              require ROOT . '/app/Views/errors.php';
+              break;
+          case 'notfound':
+              $message = "La page demandée n'existe pas.";
+              require ROOT . '/app/Views/errors.php';
+              break;
+          case 'mailtaken':
+              $message = "L'adresse mail que vous avez renseigné est déjà utilisée.";
+              require ROOT . '/app/Views/errors.php';
+              break;
+          case 'nametaken':
+              $message = "Le nom d'utilisateur que vous avez choisi est déjà utilisé.";
+              require ROOT . '/app/Views/errors.php';
+              break;
+          default:
+              break;
+        }
     }
   }
 
