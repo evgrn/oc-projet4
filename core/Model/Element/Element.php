@@ -1,11 +1,11 @@
 <?php
-namespace Core\Model;
+namespace Core\Model\Element;
 
 /**
  * Classe parente des modèles de données.
  * Contient les méthodes communes à ses enfants.
  */
-abstract class Model{
+abstract class Element{
 
   /**
    * Remplace dynamiquement la propriété appelée par le getter de la approprié et la remplace par celui-ci,

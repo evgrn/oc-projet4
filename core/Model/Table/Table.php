@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Table;
+namespace Core\Model\Table;
 
 use Core\DB\DB;
 
@@ -64,14 +64,14 @@ abstract class Table{
     else if(!$statement_params){
       return $this->db->query(
           $statement,
-          str_replace('Table', 'Model', get_class($this)),
+          str_replace('Table', 'Element', get_class($this)),
           $single);
     }
     else{
       return $this->db->prepare(
           $statement,
           $statement_params,
-          str_replace('Table', 'Model', get_class($this)),
+          str_replace('Table', 'Element', get_class($this)),
           $single);
     }
   }

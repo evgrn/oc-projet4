@@ -1,11 +1,11 @@
 <?php
-namespace App\Model;
+namespace App\Model\Element;
 
 /**
  *
  * Modèle des commentaires
  */
-class CommentModel extends \Core\Model\Model{
+class CommentElement extends \Core\Model\Element\Element{
 
   /**
    * Affiche un extrait du commentaire

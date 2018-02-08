@@ -3,7 +3,6 @@
 </header>
 
 <div class="main-content">
-  <?= $noCommentMessage ?>
   <table class="table">
     <thead>
       <tr>
@@ -33,6 +32,8 @@
           </td>
         </tr>
       <?php endforeach; ?>
+
     </tbody>
   </table>
+  <?= $noCommentMessage ?>
 </div><!-- .main-content>

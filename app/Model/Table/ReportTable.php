@@ -1,11 +1,11 @@
 <?php
-namespace App\Table;
+namespace App\Model\Table;
 
 /**
  *
  * Modèle de table des signalements
  */
-class ReportTable extends \Core\Table\Table{
+class ReportTable extends \Core\Model\Table\Table{
 
 
 

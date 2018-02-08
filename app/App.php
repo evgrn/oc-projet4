@@ -32,7 +32,7 @@ class App{
    * @return Core\Table\Table       Instance du modèle de table demandé.
    */
   public function getTable($table_name){
-    $class_name = '\App\Table\\' . ucfirst(strtolower($table_name)) . 'Table';
+    $class_name = '\App\Model\Table\\' . ucfirst(strtolower($table_name)) . 'Table';
     return new $class_name($this->getDb());
   }
 

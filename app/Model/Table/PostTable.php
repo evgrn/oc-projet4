@@ -1,15 +1,10 @@
 <?php
-
-## TODO :
-## Configurer getExcerpt() en comptant les mots
-
-
-namespace App\Table;
+namespace App\Model\Table;
 
 /**
  * Modèle de table des posts.
  */
-class PostTable extends \Core\Table\Table{
+class PostTable extends \Core\Model\Table\Table{
 
   /**
    * Récupère un nombre défini de posts, par ordre décroissant de nouveauté.

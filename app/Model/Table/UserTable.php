@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Table;
+namespace App\Model\Table;
 
 /**
  * Modèle des users.
  */
-class UserTable extends \Core\Table\Table{
+class UserTable extends \Core\Model\Table\Table{
 
 
   /**

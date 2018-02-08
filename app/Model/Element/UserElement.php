@@ -1,11 +1,11 @@
 <?php
-namespace App\Model;
+namespace App\Model\Element;
 
 /**
  *
  * Modèle des User
  */
-class UserModel extends \Core\Model\Model{
+class UserElement extends \Core\Model\Element\Element{
 
   /**
    * Renvoie le nom de l'utilisateur.

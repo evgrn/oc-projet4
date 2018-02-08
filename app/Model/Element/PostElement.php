@@ -1,11 +1,11 @@
 <?php
-namespace App\Model;
+namespace App\Model\Element;
 
 /**
  *
  * Modèle des Posts
  */
-class PostModel extends \Core\Model\Model{
+class PostElement extends \Core\Model\Element\Element{
 
   /**
    * Génère l'URL vers la version single du post pour les utilisateurs connectés.

@@ -1,11 +1,11 @@
 <?php
-namespace App\Table;
+namespace App\Model\Table;
 
 /**
  *
  * Modèle de table des commentaires
  */
-class CommentTable extends \Core\Table\Table{
+class CommentTable extends \Core\Model\Table\Table{
 
   /**
    *  Récupère les commentaires liés au post ayant l'id passé en paramètre.
