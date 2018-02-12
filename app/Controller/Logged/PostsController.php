@@ -76,10 +76,10 @@ class PostsController extends AppController{
    * Réucupère la liste des posts
    * et l'affiche dans la vue correspondante,
    */
-  public function list(){
+  public function listAll(){
     $posts = $this->post->getAll();
     $pageTitle = $this->completeTitle('Liste des chapitres');
-    $this->render('logged.posts.list', compact('posts', 'pageTitle'));
+    $this->render('logged.posts.listall', compact('posts', 'pageTitle'));
   }
 
 }

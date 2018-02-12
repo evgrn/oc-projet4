@@ -3,13 +3,13 @@
 </header>
 
 <div class="main-content">
-  
+
   <article class="chapter-index">
     <div class="row">
         <div class="chapter-content-single col-xs-12"><?= $post->content ?></div>
     </div>
     <div class="row">
-      <p class="chapter-date-single col-sm-offset-10 col-sm-2 col-xs-offset-5 col-xs-6"><?= $post->date ?></p>
+      <p class="chapter-date-single col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3 col-xs-offset-5 col-xs-6"><?= $post->date ?></p>
     </div>
     <a class="row next-chapter" href="<?= $nextPost->url?>">
       <p>Chapitre suivant : </p>

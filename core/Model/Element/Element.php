@@ -16,7 +16,7 @@ abstract class Element{
   public function __get($param){
     $method = 'get' . ucfirst(strtolower($param));
     $this->$param = $this->$method(); // Ne pas appeler la méthode à chaque fois
-    return $this->$param;
+    return htmlspecialchars($this->$param);
 
   }
 

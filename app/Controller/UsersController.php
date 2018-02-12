@@ -28,12 +28,11 @@ class UsersController extends AppController{
    */
   public function login(){
 
-    $error = false;
 
     if(!empty($_POST)){
       $auth = new DBAuth(App::getInstance()->getDb());
 
-      if($auth->login(htmlspecialchars($_POST['name']),htmlspecialchars( $_POST['pwd']))){
+      if($auth->login($_POST['name'],$_POST['pwd'])){
         if($auth->isAdmin()){
 
           header('location: index.php?page=admin.posts.index&success=loggedin&username=' . $_POST['name']);
@@ -44,7 +43,7 @@ class UsersController extends AppController{
 
       }
       else{
-        $error = true;
+        header('location: index.php?page=users.login&error=wronglogin');
       }
     }
 
@@ -70,14 +69,11 @@ class UsersController extends AppController{
    * sinon, renvoie le motif de l'échec dans la variable $error.
    */
   public function register(){
-
-    $error = false;
-
     if(!empty($_POST)){
       $result = $this->user->create(array(
-        'name' => htmlspecialchars($_POST['name']),
+        'name' => $_POST['name'],
         'pwd' => password_hash($_POST['pwd'], PASSWORD_DEFAULT),
-        'mail' => htmlspecialchars($_POST['mail'])
+        'mail' => $_POST['mail']
       ));
 
       if($result === true){

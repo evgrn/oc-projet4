@@ -45,7 +45,7 @@ class PostsController extends AppController{
       return;
     }
     else{
-      $nextPost = $this->post->getNextPost(htmlspecialchars($_GET['id']));
+      $nextPost = $this->post->getNextPost($_GET['id']);
       $commentAmount = $this->comment->getAttachedCommentSum($_GET['id'], false);
       $pageTitle = $this->completeTitle($post->title);
       $this->render('guest.posts.single', compact('post', 'comments', 'commentAmount', 'form', 'nextPost', 'pageTitle'));
@@ -57,13 +57,13 @@ class PostsController extends AppController{
    * Réucupère la liste des posts et l'affiche dans la vue correspondante,
    * si l'utilisateur est connecté, renvoie vers la version "logged" de la page.
    */
-  public function list(){
+  public function listAll(){
     if($this->auth->isLogged()){
-      header('location: index.php?page=logged.posts.list');
+      header('location: index.php?page=logged.posts.listall');
     }
     $posts = $this->post->getAll();
     $pageTitle = $this->completeTitle('Liste des chapitres');
-    $this->render('guest.posts.list', compact('posts', 'pageTitle'));
+    $this->render('guest.posts.listall', compact('posts', 'pageTitle'));
   }
 
 }

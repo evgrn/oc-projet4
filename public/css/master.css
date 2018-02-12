@@ -25,12 +25,18 @@
 
 body{
   margin-top: 35px;
-  background-image: url('../img/background.jpg');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
   background-repeat: repeat-y;
   color: dimgray;
+}
+body:not(.home-index){
+    background-image: url('../img/background.jpg');
+}
+
+body.home-index{
+  background-color: black;
 }
 
 header{
@@ -51,7 +57,7 @@ header h1{
 
 .container{
   padding: 0;
-  margin: 0;
+  margin: 35px auto !important;
 }
 
 .main-content{
@@ -88,7 +94,9 @@ form{
 
 
 /* NAVBAR */
-
+.navbar .container{
+  margin: 0 auto !important;
+}
 .navbar .menu-toggle{
   text-align: center;
   color: white;

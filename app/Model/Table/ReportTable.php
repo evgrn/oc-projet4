@@ -43,7 +43,7 @@ class ReportTable extends \Core\Model\Table\Table{
       return $sum;
     }
     else{
-      return '<a href="index.php?page=admin.comments.reported&amp;id=' . $id . '">' . $sum . '</a>';
+      return '<a href="index.php?page=admin.comments.reported&id=' . $id . '">' . $sum . '</a>';
     }
 
 

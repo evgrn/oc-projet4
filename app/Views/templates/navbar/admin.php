@@ -3,7 +3,7 @@
   <ul class="nav">
     <li class="home-link">  <a  href="index.php">Accueil</a></li>
     <li class="active"><a href="index.php?page=logged.posts.index">Derniers chapitres</a></li>
-    <li><a href="index.php?page=logged.posts.list">Liste des chapitres</a></li>
+    <li><a href="index.php?page=logged.posts.listall">Liste des chapitres</a></li>
     <li><a href="index.php?page=admin.posts.index">Administration</a></li>
     <li><a href="index.php?page=users.logout">Déconnexion</a></li>
   </ul>

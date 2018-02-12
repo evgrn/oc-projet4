@@ -43,7 +43,7 @@ class CommentTable extends \Core\Model\Table\Table{
     if($sum == 0 || $linked == false){
       return $sum;
     } else{
-      return '<a href="index.php?page=admin.comments.attached&amp;id=' . $id . '">' . $sum . '</a>';
+      return '<a href="index.php?page=admin.comments.attached&id=' . $id . '">' . $sum . '</a>';
     }
   }
 

@@ -1,9 +1,3 @@
-<?php if($error == true): ?>
-  <div class="alert alert-danger">
-    Identifiants incorrects
-  </div>
-<?php endif; ?>
-
 <header>
   <h1>Connexion</h1>
 </header>

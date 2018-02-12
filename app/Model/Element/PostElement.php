@@ -12,7 +12,7 @@ class PostElement extends \Core\Model\Element\Element{
    * @return string version connectée de l'URL du post
    */
   public function getUrl(){
-    return "index.php?page=logged.posts.single&amp;id={$this->id}";
+    return "index.php?page=logged.posts.single&id={$this->id}";
   }
 
   /**
@@ -20,7 +20,7 @@ class PostElement extends \Core\Model\Element\Element{
    * @return string version non connectée de l'URL du post
    */
   public function getGuestUrl(){
-    return "index.php?page=guest.posts.single&amp;id={$this->id}";
+    return "index.php?page=guest.posts.single&id={$this->id}";
   }
 
   /**

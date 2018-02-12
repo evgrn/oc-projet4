@@ -18,7 +18,7 @@ class App{
   public static function init(){
     session_start();
 
-    require ROOT . "/Core/Autoloader.php";
+    require ROOT . "/core/Autoloader.php";
     Core\Autoloader::register();
     require ROOT . "/app/Autoloader.php";
     App\Autoloader::register();

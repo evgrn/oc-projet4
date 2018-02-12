@@ -41,8 +41,8 @@ class PostsController extends AppController{
    */
   public function edit(){
     if(!empty($_POST['title']) && !empty($_POST['content'])){
-      $result = $this->post->update(htmlspecialchars($_GET['id']), array(
-        'title' => htmlspecialchars(htmlspecialchars($_POST['title'])),
+      $result = $this->post->update($_GET['id'], array(
+        'title' => $_POST['title'],
         'content' => $_POST['content']
       ));
       if($result){
@@ -50,7 +50,7 @@ class PostsController extends AppController{
       }
     }
 
-    $post = $this->post->getSingle(htmlspecialchars($_GET['id']));
+    $post = $this->post->getSingle($_GET['id']);
     $form = new BootstrapForm($post);
     $pageTitle = $this->completeTitle('Editer un chapitre');
     $this->render('admin.posts.edit', compact('form', 'success', 'pageTitle'));
@@ -65,7 +65,7 @@ class PostsController extends AppController{
 
     if(!empty($_POST['title']) && !empty($_POST['content'])){
       $result = $this->post->create(array(
-        'title' => htmlspecialchars($_POST['title']),
+        'title' => $_POST['title'],
         'content' => $_POST['content']
       ));
 

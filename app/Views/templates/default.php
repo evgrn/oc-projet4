@@ -8,20 +8,20 @@
     <meta name="description" content="Bienvenue sur le livre numérique <strong>Billet simple pour l'Alaska</strong>">
     <meta name="keywords" content="Billet Simple Pour l'Alaska, Jean Forteroche, roman">
     <meta name="author" content="Camille Maillet">
-    <link rel="icon" href="../../../public/img/icons/favicon.ico" />
+    <link rel="icon" href="img/icons/favicon.ico" />
 
     <title> <?= $pageTitle ?></title>
 
     <!--#### iOS ####-->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Billet Simple Pour l'Alaska">
-    <link rel="apple-touch-icon" href="../../../public/img/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="img/icons/favicon.ico">
 
     <!--#### Android ####-->
     <meta name="color" content="#004B8E">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Billet Simple Pour l'Alaska">
-    <link rel="icon" type="image/png" href="../../../public/img/icons/favicon.ico" sizes="192x192">
+    <link rel="icon" type="image/png" href="img/icons/favicon.ico" sizes="192x192">
 
     <!--#### Facebook ####-->
     <meta property="og:locale" content="fr_FR" />
@@ -38,11 +38,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content="Bienvenue sur le livre numérique <strong>Billet simple pour l'Alaska</strong>" />
     <meta name="twitter:title" content="Billet Simple Pour l'Alaska | Le roman en ligne de Jean Forteroche" />
-    <meta name="twitter:image" content="../../../public/img/preview-social.jpg" />
+    <meta name="twitter:image" content="<img/preview-social.jpg" />
 
     <!--#### Feuilles de style ####-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../public/css/master.css">
+    <link rel="stylesheet" href="css/master.css">
 
 
 
@@ -63,13 +63,13 @@
 
   </head>
 
-  <body>
+  <body class="<?= $pageClass ?>">
     <div class="navbar navbar-inverse navbar-fixed-top">
       <a class="menu-toggle"><i class="fas fa-bars fa-2x"></i></a>
         <?= $navbar ?>
     </div>
 
-    <div class="container <?= $containerClass ?>">
+    <div class="container <?= $pageClass ?>">
       <?= $content ?>
     </div>
 

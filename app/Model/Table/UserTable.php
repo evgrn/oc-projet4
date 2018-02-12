@@ -35,7 +35,6 @@ class UserTable extends \Core\Model\Table\Table{
    * @return bool/string        Renvoie true si l'utilisateur a été créé, renvoie le motif de l'erreur sinon.
    */
   public function create($fields){
-
     $error = $this->exists($fields['name'], $fields['mail']);
     if(!$error){
       $sql_indexes = [];

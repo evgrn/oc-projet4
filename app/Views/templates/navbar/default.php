@@ -3,7 +3,7 @@
   <ul class="nav">
     <li class="home-link">  <a  href="index.php">Accueil</a></li>
     <li class="active"><a href="index.php?page=guest.posts.index">Derniers chapitres</a></li>
-    <li><a href="index.php?page=guest.posts.list">Liste des chapitres</a></li>
+    <li><a href="index.php?page=guest.posts.listall">Liste des chapitres</a></li>
     <li><a href="index.php?page=users.login">Connexion</a></li>
     <li><a href="index.php?page=users.register">Inscription</a></li>
   </ul>

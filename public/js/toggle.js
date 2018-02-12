@@ -67,7 +67,7 @@ $(function(){
      * @return {bool} True si l'orientation est en portrait et qu'il s'agit d'un petit écran, false sinon
      */
     hasToBeUsed: function(){
-      if(this.responsive.isPortrait() && this.responsive.isMobile()){
+      if(this.responsive.isPortrait() || this.responsive.isMobile()){
         return true;
       }
       return false;
@@ -84,10 +84,13 @@ $(function(){
        * @return {bool} True si elle l'est, false sinon.
        */
       isPortrait: function(){
-        if($(window).height() > $(window).width()){
-          return true;
-        }
-        return false;
+        $(function(){
+          if($(window).height() > $(window).width()){
+            console.log('portrait');
+            return true;
+          }
+          return false;
+        })
       },
 
       /**

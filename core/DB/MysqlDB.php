@@ -33,8 +33,7 @@ class MysqlDB extends \Core\DB\DB{
    */
   private function getPDO(){
     if($this->pdo === null){
-      $pdo = new PDO("mysql:dbname=$this->db_name;host:$this->db_host", $this->db_usr, $this->db_pwd);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $pdo = new PDO("mysql:dbname=$this->db_name;host=$this->db_host", $this->db_usr, $this->db_pwd);
       $this->pdo = $pdo;
     }
 
