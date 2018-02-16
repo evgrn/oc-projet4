@@ -10,7 +10,7 @@ use \Core\HTML\BootstrapForm;
 class CommentsController extends AppController{
 
   /**
-   * Charge les constructeurs parents (choisit la navnar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
+   * Charge les constructeurs parents (choisit la navbar en fonction du type d'tilisateur et interdit l'accès si l'utilisateur n'est pas administrateur),
    * Charge les instances des modèles de table "post", "comment" et "report" dans sa propre instance.
    *
    */
@@ -104,7 +104,7 @@ class CommentsController extends AppController{
   }
 
   /**
-   * Supprime le commmentaire dont l'id est récupéré via la méthode POST et les signalements associés,
+   * Supprime le commentaire dont l'id est récupéré via la méthode POST et les signalements associés,
    * puis renvoie vers la page des commentaires liés au post concerné
    * en ajoutant la valeur 'deleted' à la variable $_GET['success'].
    */

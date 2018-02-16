@@ -1,7 +1,6 @@
 
 TODO:
 .htaccess ? interdire le listing -> check lien
-ajouter alerte mauvais login
 
 
 favicon p3

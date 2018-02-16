@@ -7,7 +7,4 @@ namespace App\Model\Element;
  */
 class ReportElement extends \Core\Model\Element\Element{
 
-
-
-
 }

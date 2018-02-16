@@ -10,7 +10,7 @@ use \Core\Auth\DBAuth;
 class AppController extends \App\Controller\AppController{
 
   /**
-   * Charge le constructeur parent (choisit la navnar en fonction du type d'tilisateur),
+   * Charge le constructeur parent (choisit la navbar en fonction du type d'tilisateur),
    * interdit l'accès si l'utilisateur n'est pas administrateur.
    *
    */

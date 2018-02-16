@@ -28,12 +28,12 @@ class PostElement extends \Core\Model\Element\Element{
    * @return string Extrait du contenu du post et bouton affilié
    */
   public function getExcerpt(){
-    $contentWordsArray = explode(' ', $this->content);
+    $text = str_replace(['<p>', '</p>'], '', $this->content);
+    $contentWordsArray = explode(' ', $text);
     $excerptWordsArray = array_slice($contentWordsArray, 0, 100);
-    $excerpt = implode(' ', $excerptWordsArray) . ' ( ...)';
+    $excerpt = implode(' ', $excerptWordsArray) . ' (...)';
 
-    $html = '<p>' . $excerpt . '</p>';
-    return $html;
+    return $excerpt;
   }
 
 }
