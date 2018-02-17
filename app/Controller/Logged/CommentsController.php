@@ -25,9 +25,9 @@ class CommentsController extends AppController{
    * puis renvoie vers la page d'index des commentaires correspondant au post lié, donnant la valeur "reportedcomment" à la variable $_GET['success'].
    */
   public function report(){
-      $result = $this->report->create(array(htmlspecialchars($_POST['commentId']),htmlspecialchars($_POST['postId'])));
+      $result = $this->report->create(array($_POST['commentId'],$_POST['postId']));
       if($result){
-        header('location: index.php?page=logged.posts.single&id=' . htmlspecialchars($_POST['postId']) . '&success=reportedcomment');
+        header('location: index.php?page=logged.posts.single&id=' . $_POST['postId'] . '&success=reportedcomment');
       }
   }
 

@@ -1,6 +1,8 @@
 <?php
 namespace App;
-
+/**
+ * Classe gérant le routage
+ */
 class Router{
 
   /**
@@ -9,7 +11,6 @@ class Router{
    */
   private static function checkPage(){
     $pathCategories = ['home', 'admin', 'logged', 'users', 'guest'];
-    $results = false;
     $pathCategoriesSum =  sizeof($pathCategories);
     $path = explode('.', $_GET['page']);
 

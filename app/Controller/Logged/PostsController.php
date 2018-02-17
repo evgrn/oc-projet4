@@ -36,8 +36,8 @@ class PostsController extends AppController{
    * si la variable POST n'est pas vide, sauvegarde le commentaire.
    */
   public function single(){
-    $post = $this->post->getSingle(htmlspecialchars($_GET['id']));
-    $nextPost = $this->post->getNextPost(htmlspecialchars($_GET['id']));
+    $post = $this->post->getSingle($_GET['id']);
+    $nextPost = $this->post->getNextPost($_GET['id']);
 
 
     if($post === false){
@@ -47,9 +47,9 @@ class PostsController extends AppController{
     else{
       if(!empty($_POST)){
         $result = $this->comment->create(array(
-          'title' => htmlspecialchars($_POST['title']),
+          'title' => $_POST['title'],
           'content' => $_POST['content'],
-          'post_id' => htmlspecialchars($_POST['post_id']),
+          'post_id' => $_POST['post_id'],
           'author' => $_SESSION['userName'],
         ));
 

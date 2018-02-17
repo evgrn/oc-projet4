@@ -50,13 +50,7 @@ class MysqlDB extends \Core\DB\DB{
    */
   public function query($statement, $class_name = null, $single = false){
     $req = $this->getPDO()->query($statement);
-    if(
-      strpos($statement, 'UPDATE') === 0 ||
-      strpos($statement, 'INSERT') === 0 ||
-      strpos($statement, 'DELETE') === 0
-    ){
-      return $req;
-    }
+
     if($class_name != null){
       $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
     }

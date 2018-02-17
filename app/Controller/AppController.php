@@ -75,22 +75,10 @@ class AppController extends Controller{
    * @param  array  $data  Données à passer à la vue
    */
   protected function render($view, $data = []){
-    extract($data);
+
     $successMessage = AlertManager::getAlert();
+    parent::render($view, $data, $this->viewsPath, $this->navbar, $this->template);
 
-    $viewPath = $this->viewsPath . str_replace('.', '/', $view) . '.php';
-    
-    $pageClass = str_replace('.', '-', $view);
-    ob_start();
-    require($viewPath);
-    $content = ob_get_clean();
-
-    $navViewPath = $this->viewsPath . 'templates/navbar/' . $this->navbar . '.php';
-    ob_start();
-    require($navViewPath);
-    $navbar = ob_get_clean();
-
-    require($this->viewsPath . 'templates/' . $this->template . '.php');
   }
 
 

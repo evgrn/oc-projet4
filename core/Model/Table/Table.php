@@ -14,7 +14,7 @@ abstract class Table{
 
 
   /**
-   * Récupère la table correspondant à la classe dans la BDD et la stocke dans l'objet courant.
+   * Stocke une instance de la classe gérant la BDD et, si elle n'est pas définie, récupère et stocke le nom de la table correspondant à la classe.
    * @param DB $db Instance d'un enfant de la classe DB
    */
   public function __construct(\Core\DB\DB $db){

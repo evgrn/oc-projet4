@@ -24,8 +24,8 @@
       <form method="post" class="comment-form" id="comment-form">
         <?= $form->input('title', 'Titre', null, ['required' => true])?>
         <?= $form->input('content', 'Contenu', null, ['type' =>'textarea', 'required' => true]) ?>
-        <?= $form->input('post_id', null, htmlspecialchars($_GET['id']), ['type' => 'hidden']) ?>
-        <?= $form->input('user_id', null, htmlspecialchars($_SESSION['userName']), ['type' => 'hidden']) ?>
+        <?= $form->input('post_id', null, $_GET['id'], ['type' => 'hidden']) ?>
+        <?= $form->input('user_id', null, $_SESSION['userName'], ['type' => 'hidden']) ?>
         <?= $form->submit() ?>
       </form>
     </div>

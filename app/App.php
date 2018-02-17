@@ -15,7 +15,7 @@ class App{
   /**
    * Ouvre la session et importe et initialise les autoloaders.
    */
-  public static function init(){
+  public function init(){
     session_start();
 
     require ROOT . "/core/Autoloader.php";

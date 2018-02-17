@@ -26,21 +26,21 @@ abstract class Controller{
    * @param  string $view Nom de la vue
    * @param  array  $data Données à insérer dans la vue
    */
-  protected function render($view, $data = []){
+  protected function render($view, $data = [], $viewsPath, $navbar, $template){
     extract($data);
+    $viewPath = $viewsPath . str_replace('.', '/', $view) . '.php';
+    $pageClass = str_replace('.', '-', $view);
 
-    $viewPath = $this->viewsPath . str_replace('.', '/', $view) . '.php';
-    $containerClass = str_replace('.', '-', $view);
     ob_start();
     require($viewPath);
     $content = ob_get_clean();
 
-    $navViewPath = $this->viewsPath . 'templates/navbar/' . $this->navbar . '.php';
+    $navViewPath = $viewsPath . 'templates/navbar/' . $navbar . '.php';
     ob_start();
     require($navViewPath);
     $navbar = ob_get_clean();
 
-    require($this->viewsPath . 'templates/' . $this->template . '.php');
+    require($viewsPath . 'templates/' . $template . '.php');
   }
 
   /**
