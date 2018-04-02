@@ -1,5 +1,5 @@
 <header>
-  <h1 class="chapter-title-single"><?= $post->title ?></h1>
+  <h1 class="chapter-title-single"><?= htmlspecialchars($post->title) ?></h1>
 </header>
 
 <div class="main-content">
@@ -12,7 +12,7 @@
     </div>
     <a class="row next-chapter" href="<?= $nextPost->guestUrl?>">
       <p>Chapitre suivant : </p>
-      <h4><?= $nextPost->title ?></h4>
+      <h4><?= htmlspecialchars($nextPost->title) ?></h4>
     </a>
   </article>
 

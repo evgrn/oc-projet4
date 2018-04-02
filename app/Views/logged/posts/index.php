@@ -7,7 +7,7 @@
   <?php foreach($posts as $post): ?>
     <article class="chapter">
       <div class="row">
-        <h2 class="chapter-title-index"><?= $post->title ?></h2>
+        <h2 class="chapter-title-index"><?= htmlspecialchars($post->title) ?></h2>
       </div>
       <div class="row">
         <p class="col-md-2 col-sm-3 col-xs-6 chapter-date-index"><?= $post->date ?></p>

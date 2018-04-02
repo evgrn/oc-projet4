@@ -18,9 +18,9 @@
       <?php foreach($comments as $comment): ?>
         <tr>
           <td><span class="mobile-table-label">Id : </span><?= $comment->id ?></td>
-          <td><span class="mobile-table-label">Auteur : </span><?= $comment->author ?></td>
+          <td><span class="mobile-table-label">Auteur : </span><?= htmlspecialchars($comment->author) ?></td>
           <td><span class="mobile-table-label">Date : </span><?= $comment->date ?></td>
-          <td><span class="mobile-table-label">Titre : </span><a href="<?= $comment->url ?>"><?= $comment->title ?></a></td>
+          <td><span class="mobile-table-label">Titre : </span><a href="<?= $comment->url ?>"><?= htmlspecialchars($comment->title) ?></a></td>
           <td><span class="mobile-table-label">Signalements : </span><?= $comment->reports ?></td>
           <td>
             <?= $comment->unreport ?>

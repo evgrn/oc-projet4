@@ -1,5 +1,5 @@
 <header>
-    <h1 class="comment-title-single"><?= $comment->title ?></h1>
+    <h1 class="comment-title-single"><?= htmlspecialchars($comment->title) ?></h1>
 </header>
 
 <div class="main-content">
@@ -7,7 +7,7 @@
     <?= $comment->reportNotification ?>
     <div class="row">
       <div class="comment-content col-sm-8">
-        <p class="comment-single-details">À propos de <em><a href="<?= $post->url ?>">"<?= $post->title ?>"</a></em></strong>, par <?= $comment->author ?>, le <?= $comment->date ?> : </p>
+        <p class="comment-single-details">À propos de <em><a href="<?= $post->url ?>">"<?= $post->title ?>"</a></em></strong>, par <?= htmlspecialchars($comment->author) ?>, le <?= $comment->date ?> : </p>
         <p class="comment-content-single"><?= $comment->content ?></p>
       </div>
       <div class="comment-tools col-sm-offset-1 col-sm-2">

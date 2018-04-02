@@ -19,7 +19,7 @@
       <?php foreach($posts as $post): ?>
         <tr>
           <td><span class="mobile-table-label">Id : </span><?= $post->id ?></td>
-          <td><span class="mobile-table-label">Titre : </span><a href="<?= $post->url ?>"><?= $post->title ?></a></td>
+          <td><span class="mobile-table-label">Titre : </span><a href="<?= $post->url ?>"><?= htmlspecialchars($post->title) ?></a></td>
           <td><span class="mobile-table-label">Date : </span><?= $post->date ?></td>
           <td><span class="mobile-table-label">Commentaires : </span><?= $post->commentNb ?></td>
           <td><span class="mobile-table-label">Commentaires signalés : </span><?= $post->reportedCommentNb ?></td>

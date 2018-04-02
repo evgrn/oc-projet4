@@ -13,7 +13,7 @@
     </div>
     <a class="row next-chapter" href="<?= $nextPost->url?>">
       <p>Chapitre suivant : </p>
-      <h4><?= $nextPost->title ?></h4>
+      <h4><?= htmlspecialchars($nextPost->title) ?></h4>
     </a>
   </article>
 
@@ -34,8 +34,8 @@
       <?php foreach($comments as $comment): ?>
         <div class="comment-block row" id="comment-<?= $comment->id ?>">
           <div class="comment col-sm-9">
-            <h3 class="comment-title"><?= $comment->title ?></h3>
-            <p class="comment-details">Par <?= $comment->author ?>, le <?= $comment->date ?></p>
+            <h3 class="comment-title"><?= htmlspecialchars($comment->title) ?></h3>
+            <p class="comment-details">Par <?= htmlspecialchars($comment->author) ?>, le <?= $comment->date ?></p>
             <p class="comment-content"><?= $comment->content ?></p>
           </div>
           <div class="comment-report col-sm-offset-1 col-sm-2">
